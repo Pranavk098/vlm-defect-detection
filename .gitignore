@@ -1,0 +1,42 @@
+# Virtual environments
+venv/
+venv_vlm/
+.env
+
+# Model checkpoints & weights (too large for GitHub)
+checkpoints/
+*.pt
+*.pth
+*.bin
+*.safetensors
+
+# Dataset folders
+mvtec_anomaly_detection/
+
+# Cloned repos (reference in README instead)
+LLaVA/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# Logs (optional - remove these lines if you want to include logs)
+# error_log.txt
+# training-output.txt
