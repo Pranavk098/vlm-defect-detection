@@ -1,0 +1,28 @@
+# Profile: RTX 5070 / any 8 GB VRAM GPU
+# Strategy: QLoRA (4-bit) + rank-8 LoRA + batch-1 + grad-accum-16
+# Effective batch: 1 * 16 = 16 samples/step — same as original design
+# Expected peak VRAM: ~6.5–7.5 GB
+
+_base_: "base.yaml"
+
+lora:
+  r: 8                   # 128 in original = unnecessary; rank-8 converges fine for binary QA
+  alpha: 16
+
+quantization:
+  load_in_4bit: true     # mandatory for 8 GB
+
+data:
+  num_workers: 2         # lower to save CPU-RAM pressure
+
+training:
+  batch_size: 1          # must be 1 on 8 GB
+  grad_accumulation: 16  # effective batch = 16
+  report_to: "none"      # W&B optional locally; flip to "wandb" if you have it set up
+  dataloader_pin_memory: false   # avoid extra RAM usage
+
+# Tips for squeezing into 8 GB:
+# 1. pip install "vlm-defect[flash]"  then set attn_implementation: flash_attention_2
+#    RTX 50xx (Blackwell) supports flash-attn; saves ~1 GB VRAM
+# 2. If still OOM, reduce max_length from 512 → 256 (defect answers are short)
+# 3. Avoid running other GPU processes simultaneously

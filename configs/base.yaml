@@ -1,0 +1,60 @@
+# Base configuration — shared by all hardware profiles.
+# Do NOT use this file directly; use local_8gb.yaml or colab_a100.yaml.
+
+model:
+  # HuggingFace-native LLaVA-1.5-7B (no external repo clone needed)
+  base_id: "llava-hf/llava-1.5-7b-hf"
+  # Alternatively: "llava-hf/llava-1.5-13b-hf" (needs A100)
+  torch_dtype: "bfloat16"           # bf16 on Ampere+; use "float16" on older GPUs
+  attn_implementation: "eager"      # override to "flash_attention_2" if flash-attn installed
+
+lora:
+  r: 8                              # rank — see profile overrides
+  alpha: 16                         # keep alpha = 2 * r as a rule of thumb
+  dropout: 0.05
+  bias: "none"
+  task_type: "CAUSAL_LM"
+  # Only fine-tune attention projections to save memory
+  target_modules:
+    - "q_proj"
+    - "v_proj"
+    - "k_proj"
+    - "o_proj"
+
+quantization:
+  load_in_4bit: true
+  bnb_4bit_quant_type: "nf4"
+  bnb_4bit_use_double_quant: true   # saves ~0.4 bits/param extra
+  bnb_4bit_compute_dtype: "bfloat16"
+
+data:
+  dataset_root: "mvtec_anomaly_detection"
+  json_path: "data/mvtec_train.json"
+  val_split: 0.1                    # 10 % held-out validation
+  max_length: 512                   # token limit — 512 is enough for Yes/No + description
+  image_size: 336                   # CLIP patch size expected by LLaVA-1.5
+  num_workers: 4
+
+training:
+  output_dir: "checkpoints/llava-mvtec-lora"
+  epochs: 3
+  lr: 2.0e-4
+  lr_scheduler: "cosine"
+  warmup_ratio: 0.03
+  weight_decay: 0.0
+  grad_clip: 1.0
+  gradient_checkpointing: true
+  fp16: false
+  bf16: true
+  logging_steps: 10
+  eval_steps: 100
+  save_steps: 200
+  save_total_limit: 3
+  load_best_model_at_end: true
+  metric_for_best_model: "eval_loss"
+  report_to: "wandb"               # set to "none" to disable W&B
+
+inference:
+  max_new_tokens: 64
+  temperature: 0.1
+  do_sample: false

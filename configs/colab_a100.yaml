@@ -1,0 +1,39 @@
+# Profile: Google Colab Pro — A100 (40 GB) or L4 (24 GB)
+# Strategy: 8-bit quant (optional) + rank-64 LoRA + larger batch
+# No 4-bit required — A100 has plenty of VRAM for bfloat16 LoRA
+# Expected peak VRAM (A100): ~18–22 GB
+
+_base_: "base.yaml"
+
+model:
+  torch_dtype: "bfloat16"
+  attn_implementation: "flash_attention_2"  # flash-attn pre-installed on Colab A100
+
+lora:
+  r: 64                  # Higher rank = richer adapter; A100 can afford it
+  alpha: 128
+
+quantization:
+  load_in_4bit: false    # Not needed on A100; disable for cleaner training
+  load_in_8bit: false
+
+data:
+  num_workers: 4
+  # Colab: dataset must live in Google Drive
+  # Mount your Drive and set these paths accordingly:
+  dataset_root: "/content/drive/MyDrive/vlm-defect/mvtec_anomaly_detection"
+  json_path: "/content/drive/MyDrive/vlm-defect/data/mvtec_train.json"
+
+training:
+  batch_size: 8
+  grad_accumulation: 2   # effective batch = 16
+  output_dir: "/content/drive/MyDrive/vlm-defect/checkpoints/llava-mvtec-lora"
+  report_to: "wandb"     # W&B is free and survives Colab disconnects
+  dataloader_pin_memory: true
+
+# Google Drive layout expected:
+# MyDrive/vlm-defect/
+# ├── mvtec_anomaly_detection/   (download from kaggle or gdrive)
+# ├── data/
+# │   └── mvtec_train.json
+# └── checkpoints/               (auto-created)

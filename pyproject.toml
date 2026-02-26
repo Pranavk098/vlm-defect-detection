@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "vlm-defect"
+version = "0.1.0"
+description = "VLM-based manufacturing defect detection using LLaVA on MVTec-AD"
+requires-python = ">=3.10"
+
+# Minimal runtime deps — inference only
+dependencies = [
+    "torch>=2.2,<2.4",
+    "torchvision>=0.17,<0.19",
+    "transformers>=4.40.0",        # native LlavaForConditionalGeneration
+    "pillow>=10.0",
+    "pyyaml>=6.0",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+# Full training stack — works locally and on Colab
+train = [
+    "peft>=0.10.0",
+    "bitsandbytes>=0.43.0",        # 4-bit QLoRA
+    "accelerate>=0.29.0",
+    "trl>=0.8.6",                  # SFTTrainer with vision support
+    "datasets>=2.18.0",
+    "scikit-learn>=1.4",
+    "wandb>=0.16",                 # experiment tracking
+    "einops>=0.7",
+]
+# Flash Attention — optional speed-up; only works on Ampere+ (A100, RTX 30/40/50xx)
+flash = [
+    "flash-attn>=2.5; sys_platform == 'linux'",
+]
+# Gradio inference UI
+ui = [
+    "gradio>=4.20",
+]
+# Colab convenience extras
+colab = [
+    "gdown>=5.0",                  # download from Google Drive
+    "kaggle>=1.6",                 # Kaggle API for dataset download
+    "ipywidgets>=8.0",
+]
+# Everything
+all = [
+    "vlm-defect[train]",
+    "vlm-defect[ui]",
+]
+
+[project.scripts]
+vlm-prepare  = "scripts.prepare_data:main"
+vlm-train    = "scripts.train:main"
+vlm-infer    = "scripts.inference:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*", "scripts*"]
+
+[tool.setuptools.package-dir]
+"" = "."
+
+# ---------------------------------------------------------------------------
+# Tooling config
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+select = ["E", "F", "I"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  train:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: vlm-defect:latest
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - WANDB_API_KEY=${WANDB_API_KEY:-}      # pass from host env
+      - PYTHONIOENCODING=utf-8
+    volumes:
+      # Mount dataset and checkpoints from host (large files stay on host disk)
+      - ../mvtec_anomaly_detection:/workspace/mvtec_anomaly_detection:ro
+      - ../data:/workspace/data
+      - ../checkpoints:/workspace/checkpoints
+    shm_size: "8gb"                           # prevents DataLoader shared-memory crash
+    command: ["python", "scripts/train.py", "--config", "configs/local_8gb.yaml"]
