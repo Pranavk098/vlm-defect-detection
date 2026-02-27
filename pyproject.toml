@@ -13,38 +13,50 @@ dependencies = [
     "torch>=2.2",
     "torchvision>=0.17",
     "torchaudio>=2.2",
-    # LLaVA core
+    # Config and I/O
+    "pyyaml>=6.0",
+    "pillow",
+    "requests",
+]
+
+[project.optional-dependencies]
+# Full training stack — use this for local or Colab training:
+#   pip install -e ".[train]"
+train = [
     "transformers==4.37.2",
     "tokenizers==0.15.1",
     "accelerate==0.27.2",
     "peft==0.9.0",
     "bitsandbytes>=0.41.3",
-    # Logging & experiment tracking
     "wandb>=0.16",
-    # Config parsing
-    "pyyaml>=6.0",
-    # Inference UI
-    "gradio==4.16.0",
-    # LLaVA aux deps
-    "shortuuid",
-    "einops",
-    "einops-exts",
-    "timm",
-    "openai-clip",
     "scikit-learn",
-    "markdown2",
-    "protobuf",
     "sentencepiece",
-    "requests",
-    "pillow",
+    "protobuf",
 ]
 
-[project.optional-dependencies]
+# Training + Flash Attention 2 (~1 GB VRAM savings on Ampere/Hopper GPUs):
+#   pip install -e ".[train,flash]"
+flash = [
+    "flash-attn>=2.5",
+]
+
+# Inference only — no bitsandbytes, no training deps:
+#   pip install -e ".[inference]"
+inference = [
+    "transformers==4.37.2",
+    "tokenizers==0.15.1",
+    "accelerate==0.27.2",
+    "peft==0.9.0",
+    "gradio==4.16.0",
+    "sentencepiece",
+]
+
 dev = ["pytest", "black", "isort", "ruff"]
 
 [project.scripts]
 vlm-prepare = "vlm_defect.cli:prepare"
 vlm-train   = "vlm_defect.cli:train"
+vlm-eval    = "vlm_defect.cli:eval"
 
 [tool.setuptools.packages.find]
 where = ["src"]

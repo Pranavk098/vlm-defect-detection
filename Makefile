@@ -1,8 +1,14 @@
-.PHONY: install prepare train docker-build docker-train verify clean help
+.PHONY: install prepare train eval docker-build docker-train verify clean help
 
 # ── Installation ────────────────────────────────────────────────────────────
 install:
-	pip install -e .
+	pip install -e ".[train]"
+
+install-flash:
+	pip install -e ".[train,flash]"
+
+install-inference:
+	pip install -e ".[inference]"
 
 # ── Data preparation ─────────────────────────────────────────────────────────
 ## Run this BEFORE make train.
@@ -20,6 +26,13 @@ prepare:
 OVERRIDE ?=
 train:
 	python scripts/train.py configs/local_8gb.yaml $(OVERRIDE)
+
+# ── Evaluation ───────────────────────────────────────────────────────────────
+## Runs accuracy / F1 / confusion matrix on the held-out val split.
+## Usage: make eval CHECKPOINT=checkpoints/llava-mvtec-lora
+CHECKPOINT ?= checkpoints/llava-mvtec-lora
+eval:
+	python scripts/evaluate.py $(CHECKPOINT) configs/local_8gb.yaml
 
 # ── Docker ───────────────────────────────────────────────────────────────────
 docker-build:
@@ -42,10 +55,14 @@ clean:
 
 help:
 	@echo "Targets:"
-	@echo "  install       pip install -e ."
-	@echo "  prepare       Build data/mvtec_train.json from mvtec_anomaly_detection/"
-	@echo "  train         Fine-tune LLaVA (reads configs/local_8gb.yaml)"
-	@echo "  docker-build  Build Docker image"
-	@echo "  docker-train  Run training inside Docker"
-	@echo "  verify        Check environment / package versions"
-	@echo "  clean         Remove generated data and checkpoints"
+	@echo "  install          pip install -e '.[train]'"
+	@echo "  install-flash    pip install -e '.[train,flash]'  (+ Flash Attention 2)"
+	@echo "  install-inference pip install -e '.[inference]'   (no bitsandbytes)"
+	@echo "  prepare          Build data/mvtec_train.json from mvtec_anomaly_detection/"
+	@echo "  train            Fine-tune LLaVA (reads configs/local_8gb.yaml)"
+	@echo "  eval             Evaluate checkpoint — accuracy / F1 / confusion matrix"
+	@echo "                   Usage: make eval CHECKPOINT=checkpoints/llava-mvtec-lora"
+	@echo "  docker-build     Build Docker image"
+	@echo "  docker-train     Run training inside Docker"
+	@echo "  verify           Check environment / package versions"
+	@echo "  clean            Remove generated data and checkpoints"

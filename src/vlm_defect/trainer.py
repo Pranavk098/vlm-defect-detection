@@ -21,7 +21,7 @@ from pathlib import Path
 import yaml
 from transformers import Trainer, TrainingArguments
 
-from vlm_defect.data import MVTecDataset, collate_fn
+from vlm_defect.data import collate_fn, load_split
 from vlm_defect.model import load_model_and_processor
 
 
@@ -82,14 +82,14 @@ def main() -> None:
     print("[INFO] Loading model and processor...")
     model, processor = load_model_and_processor(cfg)
 
-    print("[INFO] Building dataset...")
-    dataset = MVTecDataset(
+    print("[INFO] Building train/val split...")
+    train_dataset, val_dataset = load_split(
         json_path=data_json,
         image_folder=image_folder,
         processor=processor,
         model_max_length=t["model_max_length"],
+        val_fraction=d.get("val_fraction", 0.1),
     )
-    print(f"[INFO] {len(dataset)} samples loaded.")
 
     training_args = TrainingArguments(
         output_dir=str(project_dir / t["output_dir"]),
@@ -100,9 +100,12 @@ def main() -> None:
         bf16=t["bf16"],
         tf32=t["tf32"],
         evaluation_strategy=t["evaluation_strategy"],
+        eval_steps=t.get("eval_steps", 100),
         save_strategy=t["save_strategy"],
         save_steps=t["save_steps"],
         save_total_limit=t["save_total_limit"],
+        load_best_model_at_end=t.get("load_best_model_at_end", True),
+        metric_for_best_model=t.get("metric_for_best_model", "eval_loss"),
         learning_rate=t["learning_rate"],
         weight_decay=t["weight_decay"],
         warmup_ratio=t["warmup_ratio"],
@@ -117,7 +120,8 @@ def main() -> None:
     trainer = Trainer(
         model=model,
         args=training_args,
-        train_dataset=dataset,
+        train_dataset=train_dataset,
+        eval_dataset=val_dataset,
         data_collator=collate_fn,
     )
 

@@ -1,13 +1,16 @@
 """MVTec AD data preparation and PyTorch Dataset for LLaVA fine-tuning.
 
-Two public surfaces:
+Three public surfaces:
   1. create_dataset() / main()  — one-shot JSON builder (run via make prepare)
   2. MVTecDataset + collate_fn  — used by the HuggingFace Trainer at training time
+  3. load_split()               — returns (train_dataset, val_dataset) with a
+                                  reproducible 10% held-out validation split
 """
 
 from __future__ import annotations
 
 import json
+import random
 import uuid
 from pathlib import Path
 
@@ -121,7 +124,7 @@ if __name__ == "__main__":
 # ---------------------------------------------------------------------------
 
 class MVTecDataset(torch.utils.data.Dataset):
-    """Load the MVTec conversation JSON and tokenise samples for LLaVA.
+    """Load a list of MVTec conversation records and tokenise for LLaVA.
 
     Each item encodes the full USER→ASSISTANT conversation with the image.
     Prompt tokens are masked to -100 in ``labels`` so the model only learns
@@ -130,13 +133,12 @@ class MVTecDataset(torch.utils.data.Dataset):
 
     def __init__(
         self,
-        json_path: Path,
+        records: list[dict],
         image_folder: Path,
         processor,
         model_max_length: int = 2048,
     ) -> None:
-        with open(json_path) as f:
-            self.data = json.load(f)
+        self.data = records
         self.image_folder = Path(image_folder)
         self.processor = processor
         self.model_max_length = model_max_length
@@ -184,6 +186,42 @@ class MVTecDataset(torch.utils.data.Dataset):
             "pixel_values": pixel_values,
             "labels": labels,
         }
+
+
+def load_split(
+    json_path: Path,
+    image_folder: Path,
+    processor,
+    model_max_length: int = 2048,
+    val_fraction: float = 0.1,
+    seed: int = 42,
+) -> tuple[MVTecDataset, MVTecDataset]:
+    """Load *json_path* and return a reproducible (train, val) dataset pair.
+
+    Args:
+        json_path: Path to the JSON file produced by ``create_dataset()``.
+        image_folder: Root directory containing MVTec images.
+        processor: HuggingFace processor (tokenizer + image processor).
+        model_max_length: Maximum token length passed to the processor.
+        val_fraction: Fraction of samples held out for validation (default 0.1).
+        seed: Random seed for the shuffle so splits are reproducible.
+    """
+    with open(json_path) as f:
+        records = json.load(f)
+
+    rng = random.Random(seed)
+    shuffled = records[:]
+    rng.shuffle(shuffled)
+
+    n_val = max(1, int(len(shuffled) * val_fraction))
+    val_records = shuffled[:n_val]
+    train_records = shuffled[n_val:]
+
+    print(f"[INFO] Split: {len(train_records)} train / {len(val_records)} val")
+
+    train_ds = MVTecDataset(train_records, image_folder, processor, model_max_length)
+    val_ds = MVTecDataset(val_records, image_folder, processor, model_max_length)
+    return train_ds, val_ds
 
 
 def collate_fn(batch: list[dict]) -> dict:
