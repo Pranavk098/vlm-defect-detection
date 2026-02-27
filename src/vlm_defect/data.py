@@ -1,18 +1,24 @@
-"""Prepare MVTec AD dataset in LLaVA conversation format.
+"""MVTec AD data preparation and PyTorch Dataset for LLaVA fine-tuning.
 
-Can be used as a library module or run directly:
-    python -m vlm_defect.data
-    vlm-prepare                                         # installed entrypoint
-    python scripts/prepare_data.py                      # standalone script
+Two public surfaces:
+  1. create_dataset() / main()  — one-shot JSON builder (run via make prepare)
+  2. MVTecDataset + collate_fn  — used by the HuggingFace Trainer at training time
 """
 
 from __future__ import annotations
 
-import argparse
 import json
 import uuid
 from pathlib import Path
 
+import torch
+from PIL import Image
+from torch.nn.utils.rnn import pad_sequence
+
+
+# ---------------------------------------------------------------------------
+# JSON builder (make prepare / vlm-prepare)
+# ---------------------------------------------------------------------------
 
 def create_dataset(dataset_root: Path, output_file: Path) -> None:
     """Walk *dataset_root* and write a LLaVA-format JSON to *output_file*."""
@@ -85,6 +91,8 @@ def create_dataset(dataset_root: Path, output_file: Path) -> None:
 
 
 def main() -> None:
+    import argparse
+
     parser = argparse.ArgumentParser(
         description="Prepare MVTec AD dataset for LLaVA fine-tuning"
     )
@@ -106,3 +114,100 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+# ---------------------------------------------------------------------------
+# PyTorch Dataset + collate — used by HuggingFace Trainer
+# ---------------------------------------------------------------------------
+
+class MVTecDataset(torch.utils.data.Dataset):
+    """Load the MVTec conversation JSON and tokenise samples for LLaVA.
+
+    Each item encodes the full USER→ASSISTANT conversation with the image.
+    Prompt tokens are masked to -100 in ``labels`` so the model only learns
+    to predict the assistant's reply.
+    """
+
+    def __init__(
+        self,
+        json_path: Path,
+        image_folder: Path,
+        processor,
+        model_max_length: int = 2048,
+    ) -> None:
+        with open(json_path) as f:
+            self.data = json.load(f)
+        self.image_folder = Path(image_folder)
+        self.processor = processor
+        self.model_max_length = model_max_length
+
+    def __len__(self) -> int:
+        return len(self.data)
+
+    def __getitem__(self, idx: int) -> dict:
+        item = self.data[idx]
+        image = Image.open(self.image_folder / item["image"]).convert("RGB")
+
+        human = item["conversations"][0]["value"]
+        gpt = item["conversations"][1]["value"]
+
+        # Full conversation fed to the model
+        full_prompt = f"USER: {human} ASSISTANT: {gpt}</s>"
+        # Prefix that must be masked in labels
+        prefix_prompt = f"USER: {human} ASSISTANT: "
+
+        enc = self.processor(
+            text=full_prompt,
+            images=image,
+            return_tensors="pt",
+            max_length=self.model_max_length,
+            truncation=True,
+            padding=False,
+        )
+
+        input_ids = enc["input_ids"].squeeze(0)
+        attention_mask = enc["attention_mask"].squeeze(0)
+        pixel_values = enc["pixel_values"].squeeze(0)
+
+        # Mask all prompt tokens; model learns only the assistant reply
+        prefix_len = len(
+            self.processor.tokenizer(
+                prefix_prompt, add_special_tokens=False
+            )["input_ids"]
+        )
+        labels = input_ids.clone()
+        labels[:prefix_len] = -100
+
+        return {
+            "input_ids": input_ids,
+            "attention_mask": attention_mask,
+            "pixel_values": pixel_values,
+            "labels": labels,
+        }
+
+
+def collate_fn(batch: list[dict]) -> dict:
+    """Pad a batch of variable-length samples from MVTecDataset."""
+    input_ids = pad_sequence(
+        [item["input_ids"] for item in batch],
+        batch_first=True,
+        padding_value=0,
+    )
+    attention_mask = pad_sequence(
+        [item["attention_mask"] for item in batch],
+        batch_first=True,
+        padding_value=0,
+    )
+    labels = pad_sequence(
+        [item["labels"] for item in batch],
+        batch_first=True,
+        padding_value=-100,
+    )
+    pixel_values = torch.stack([item["pixel_values"] for item in batch])
+
+    return {
+        "input_ids": input_ids,
+        "attention_mask": attention_mask,
+        "pixel_values": pixel_values,
+        "labels": labels,
+    }

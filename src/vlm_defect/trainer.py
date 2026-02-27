@@ -1,23 +1,28 @@
-"""Training orchestration — load a YAML config and launch LLaVA fine-tuning.
+"""Training orchestration using the native HuggingFace Trainer.
 
-Can be used as a library module or run directly:
-    python -m vlm_defect.trainer configs/local_8gb.yaml
-    vlm-train configs/local_8gb.yaml                    # installed entrypoint
-    python scripts/train.py configs/local_8gb.yaml      # standalone script
+LlavaForConditionalGeneration has been in HuggingFace transformers natively
+since v4.36 — no external LLaVA repo clone is required.
 
-Key-value overrides are supported for any config key:
+Usage:
+    vlm-train configs/local_8gb.yaml                     # installed entrypoint
+    python scripts/train.py configs/local_8gb.yaml        # via script
+    make train                                            # via Makefile
+
+    # CLI key=value overrides:
     vlm-train configs/local_8gb.yaml training.report_to=wandb
 """
 
 from __future__ import annotations
 
 import argparse
-import os
-import subprocess
 import sys
 from pathlib import Path
 
 import yaml
+from transformers import Trainer, TrainingArguments
+
+from vlm_defect.data import MVTecDataset, collate_fn
+from vlm_defect.model import load_model_and_processor
 
 
 def load_config(path: Path) -> dict:
@@ -33,7 +38,6 @@ def apply_overrides(cfg: dict, overrides: list[str]) -> None:
         node = cfg
         for part in parts[:-1]:
             node = node[part]
-        # Auto-cast booleans and numbers
         if value.lower() in ("true", "false"):
             value = value.lower() == "true"
         else:
@@ -47,74 +51,9 @@ def apply_overrides(cfg: dict, overrides: list[str]) -> None:
         node[parts[-1]] = value
 
 
-def build_command(cfg: dict, project_dir: Path) -> list[str]:
-    """Construct the argument list for LLaVA's train_mem.py."""
-    llava_script = project_dir / "LLaVA" / "llava" / "train" / "train_mem.py"
-    if not llava_script.exists():
-        print(f"[ERROR] LLaVA training script not found: {llava_script}")
-        print("  Clone LLaVA into the project root:")
-        print("    git clone https://github.com/haotian-liu/LLaVA.git")
-        sys.exit(1)
-
-    m = cfg["model"]
-    q = cfg["quantization"]
-    lora = cfg["lora"]
-    d = cfg["data"]
-    t = cfg["training"]
-
-    data_json = project_dir / d["path"]
-    if not data_json.exists():
-        print(f"[ERROR] Training data not found: {data_json}")
-        print("  Run:  make prepare   (or: vlm-prepare)")
-        sys.exit(1)
-
-    return [
-        sys.executable, str(llava_script),
-        "--model_name_or_path",          m["name_or_path"],
-        "--version",                     m["version"],
-        "--data_path",                   str(data_json),
-        "--image_folder",                str(project_dir / d["image_folder"]),
-        "--vision_tower",                m["vision_tower"],
-        "--mm_projector_type",           m["mm_projector_type"],
-        "--mm_vision_select_layer",      str(m["mm_vision_select_layer"]),
-        "--mm_use_im_start_end",         str(m["mm_use_im_start_end"]),
-        "--mm_use_im_patch_token",       str(m["mm_use_im_patch_token"]),
-        "--image_aspect_ratio",          m["image_aspect_ratio"],
-        "--group_by_modality_length",    str(t.get("group_by_modality_length", True)),
-        "--bf16",                        str(t["bf16"]),
-        "--output_dir",                  str(project_dir / t["output_dir"]),
-        "--num_train_epochs",            str(t["num_train_epochs"]),
-        "--per_device_train_batch_size", str(t["per_device_train_batch_size"]),
-        "--per_device_eval_batch_size",  str(t["per_device_eval_batch_size"]),
-        "--gradient_accumulation_steps", str(t["gradient_accumulation_steps"]),
-        "--bits",                        str(q["bits"]),
-        "--double_quant",                str(q["double_quant"]),
-        "--quant_type",                  q["quant_type"],
-        "--evaluation_strategy",         t["evaluation_strategy"],
-        "--save_strategy",               t["save_strategy"],
-        "--save_steps",                  str(t["save_steps"]),
-        "--save_total_limit",            str(t["save_total_limit"]),
-        "--learning_rate",               str(t["learning_rate"]),
-        "--weight_decay",                str(t["weight_decay"]),
-        "--warmup_ratio",                str(t["warmup_ratio"]),
-        "--lr_scheduler_type",           t["lr_scheduler_type"],
-        "--logging_steps",               str(t["logging_steps"]),
-        "--tf32",                        str(t["tf32"]),
-        "--model_max_length",            str(t["model_max_length"]),
-        "--gradient_checkpointing",      str(t["gradient_checkpointing"]),
-        "--dataloader_num_workers",      str(t["dataloader_num_workers"]),
-        "--lazy_preprocess",             str(t["lazy_preprocess"]),
-        "--report_to",                   t.get("report_to", "none"),
-        "--lora_enable",                 str(lora["enable"]),
-        "--lora_r",                      str(lora["r"]),
-        "--lora_alpha",                  str(lora["alpha"]),
-        "--lora_dropout",                str(lora["dropout"]),
-    ]
-
-
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Launch LLaVA fine-tuning from a YAML config file"
+        description="Fine-tune LLaVA on MVTec AD using HuggingFace Trainer"
     )
     parser.add_argument("config", type=Path, help="Path to YAML config file")
     parser.add_argument(
@@ -129,28 +68,67 @@ def main() -> None:
     apply_overrides(cfg, args.overrides)
 
     project_dir = Path(__file__).parent.parent.parent.absolute()
-    cmd = build_command(cfg, project_dir)
-
     t = cfg["training"]
     d = cfg["data"]
+
+    data_json = project_dir / d["path"]
+    if not data_json.exists():
+        print(f"[ERROR] Training data not found: {data_json}")
+        print("  Run:  make prepare   (or: vlm-prepare)")
+        sys.exit(1)
+
+    image_folder = project_dir / d["image_folder"]
+
+    print("[INFO] Loading model and processor...")
+    model, processor = load_model_and_processor(cfg)
+
+    print("[INFO] Building dataset...")
+    dataset = MVTecDataset(
+        json_path=data_json,
+        image_folder=image_folder,
+        processor=processor,
+        model_max_length=t["model_max_length"],
+    )
+    print(f"[INFO] {len(dataset)} samples loaded.")
+
+    training_args = TrainingArguments(
+        output_dir=str(project_dir / t["output_dir"]),
+        num_train_epochs=t["num_train_epochs"],
+        per_device_train_batch_size=t["per_device_train_batch_size"],
+        per_device_eval_batch_size=t["per_device_eval_batch_size"],
+        gradient_accumulation_steps=t["gradient_accumulation_steps"],
+        bf16=t["bf16"],
+        tf32=t["tf32"],
+        evaluation_strategy=t["evaluation_strategy"],
+        save_strategy=t["save_strategy"],
+        save_steps=t["save_steps"],
+        save_total_limit=t["save_total_limit"],
+        learning_rate=t["learning_rate"],
+        weight_decay=t["weight_decay"],
+        warmup_ratio=t["warmup_ratio"],
+        lr_scheduler_type=t["lr_scheduler_type"],
+        logging_steps=t["logging_steps"],
+        gradient_checkpointing=t["gradient_checkpointing"],
+        dataloader_num_workers=t["dataloader_num_workers"],
+        report_to=t.get("report_to", "none"),
+        remove_unused_columns=False,  # keep pixel_values
+    )
+
+    trainer = Trainer(
+        model=model,
+        args=training_args,
+        train_dataset=dataset,
+        data_collator=collate_fn,
+    )
+
     print(f"[INFO] Config:    {args.config}")
-    print(f"[INFO] Data:      {project_dir / d['path']}")
+    print(f"[INFO] Data:      {data_json}")
     print(f"[INFO] Output:    {t['output_dir']}")
     print(f"[INFO] report_to: {t.get('report_to', 'none')}")
     print("[INFO] Starting training...\n")
 
-    env = os.environ.copy()
-    env["PYTHONIOENCODING"] = "utf-8"
-    env["PYTHONPATH"] = str(project_dir / "LLaVA")
-
-    try:
-        subprocess.run(cmd, check=True, env=env)
-        print("\n[INFO] Training complete!")
-    except subprocess.CalledProcessError as e:
-        print(f"\n[ERROR] Training failed (exit code {e.returncode})")
-        sys.exit(e.returncode)
-    except KeyboardInterrupt:
-        print("\n[INFO] Training interrupted.")
+    trainer.train()
+    print("\n[INFO] Training complete!")
 
 
 if __name__ == "__main__":

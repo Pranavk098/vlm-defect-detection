@@ -2,6 +2,10 @@
 
 End-to-end instructions for fine-tuning LLaVA-1.5-7B on MVTec AD.
 
+`LlavaForConditionalGeneration` is built into HuggingFace `transformers` since
+v4.36, so **no external LLaVA repo clone is required**. Everything runs through
+the standard HuggingFace `Trainer`.
+
 ---
 
 ## Prerequisites
@@ -13,7 +17,8 @@ End-to-end instructions for fine-tuning LLaVA-1.5-7B on MVTec AD.
 | Disk space | 25 GB | 50 GB |
 | CUDA toolkit | 11.8 | 12.1 |
 
-> **Google Colab:** Use a T4 (15 GB) or A100 runtime. Open `notebooks/LLaVA_Train_Colab.ipynb`.
+> **Google Colab:** Use a T4 (15 GB) or A100 runtime. Open
+> `notebooks/LLaVA_Train_Colab.ipynb`.
 > **Docker:** Skip to the [Docker section](#option-c-docker).
 
 ---
@@ -25,32 +30,18 @@ git clone https://github.com/Pranavk098/vlm-defect-detection.git
 cd vlm-defect-detection
 ```
 
-## Step 2 — Clone LLaVA
-
-The training script calls LLaVA's own `train_mem.py`. It must be present at `LLaVA/` inside the project root.
-
-```bash
-git clone https://github.com/haotian-liu/LLaVA.git
-```
-
-Expected layout after this step:
-```
-vlm-defect-detection/
-├── LLaVA/               ← cloned here
-├── configs/
-├── scripts/
-├── src/
-└── ...
-```
-
-## Step 3 — Install dependencies
+## Step 2 — Install dependencies
 
 ```bash
 pip install -e .
 ```
 
-This installs the `vlm_defect` package (from `src/`) along with all dependencies
-declared in `pyproject.toml` (torch, transformers, peft, bitsandbytes, wandb, …).
+This installs the `vlm_defect` package (from `src/`) along with all
+dependencies declared in `pyproject.toml`
+(torch, transformers, peft, bitsandbytes, wandb, …).
+
+The model weights (`llava-hf/llava-1.5-7b-hf`) are downloaded automatically
+from the HuggingFace Hub the first time training starts.
 
 Verify everything loaded correctly:
 
@@ -72,12 +63,14 @@ Python 3.11.x
   OK  yaml             6.0.x
 ```
 
-> **bitsandbytes on Windows:** Use WSL2 or Docker; bitsandbytes has no native Windows build.
+> **bitsandbytes on Windows:** Use WSL2 or Docker; bitsandbytes has no native
+> Windows build.
 
-## Step 4 — Download the MVTec AD dataset
+## Step 3 — Download the MVTec AD dataset
 
-1. Register and download from: <https://www.mvtec.com/company/research/datasets/mvtec-ad>
-2. Extract the archive into the project root so the layout matches:
+1. Register and download from:
+   <https://www.mvtec.com/company/research/datasets/mvtec-ad>
+2. Extract the archive into the project root:
 
 ```
 vlm-defect-detection/
@@ -90,7 +83,7 @@ vlm-defect-detection/
     └── ...  (15 categories total)
 ```
 
-## Step 5 — Prepare training data
+## Step 4 — Prepare training data
 
 ```bash
 make prepare
@@ -102,7 +95,7 @@ python scripts/prepare_data.py \
     --output data/mvtec_train.json
 ```
 
-This scans every category's `train/good/` and `test/` folders and writes
+Scans every category's `train/good/` and `test/` folders and writes
 `data/mvtec_train.json` in LLaVA conversation format (~5 000 samples).
 
 Sample entry:
@@ -117,17 +110,21 @@ Sample entry:
 }
 ```
 
-## Step 6 — Configure training
+## Step 5 — Configure training
 
 All hyper-parameters live in `configs/local_8gb.yaml`. Key settings:
 
 ```yaml
+model:
+  name_or_path: "llava-hf/llava-1.5-7b-hf"   # fetched from HF Hub automatically
+
 quantization:
   bits: 4            # 4-bit QLoRA — fits 8 GB VRAM
 
 lora:
   r: 128
   alpha: 256
+  target_modules: ["q_proj", "v_proj"]
 
 training:
   num_train_epochs: 3
@@ -136,7 +133,7 @@ training:
   report_to: "none"                # change to "wandb" to enable logging
 ```
 
-Any setting can be overridden at the CLI without editing the file (see Step 7).
+Any setting can be overridden at the CLI without editing the file (see Step 6).
 
 ### WandB logging (optional)
 
@@ -145,10 +142,10 @@ wandb login          # one-time, saves API key to ~/.netrc
 ```
 
 Then either:
-- Pass `training.report_to=wandb` as a CLI override (see Step 7), or
+- Pass `training.report_to=wandb` as a CLI override (see Step 6), or
 - Edit `configs/local_8gb.yaml` and set `report_to: "wandb"` permanently.
 
-## Step 7 — Run training
+## Step 6 — Run training
 
 ### Option A — make (recommended for local)
 
@@ -171,7 +168,6 @@ vlm-train configs/local_8gb.yaml training.report_to=wandb
 
 # Or via the script:
 python scripts/train.py configs/local_8gb.yaml
-python scripts/train.py configs/local_8gb.yaml training.report_to=wandb
 ```
 
 ### Option C — Docker
@@ -187,13 +183,21 @@ make docker-train
 make docker-train OVERRIDE="training.report_to=wandb"
 ```
 
-The Docker image is based on `pytorch/pytorch:2.3.1-cuda12.1-cudnn8-devel` and
-installs the package automatically.
-
 ### Option D — Google Colab
 
-Open `notebooks/LLaVA_Train_Colab.ipynb`. The notebook handles the clone,
-install, dataset download, and training steps interactively.
+Open `notebooks/LLaVA_Train_Colab.ipynb`. The notebook handles the install,
+dataset download, and training steps interactively.
+
+---
+
+## Package layout (src/vlm_defect/)
+
+| Module | Responsibility |
+|--------|---------------|
+| `model.py` | `load_model_and_processor(cfg)` — 4-bit QLoRA via BitsAndBytesConfig + LoRA |
+| `data.py` | `create_dataset()` (JSON builder) · `MVTecDataset` · `collate_fn` |
+| `trainer.py` | `main()` — wires model, dataset, and HuggingFace `Trainer` |
+| `cli.py` | `prepare()` / `train()` — entrypoints registered in `pyproject.toml` |
 
 ---
 
@@ -218,8 +222,8 @@ checkpoints/
 | Symptom | Fix |
 |---------|-----|
 | `ModuleNotFoundError: vlm_defect` | Run `pip install -e .` from the project root |
-| `LLaVA training script not found` | Run `git clone https://github.com/haotian-liu/LLaVA.git` in the project root |
 | `Training data not found: data/mvtec_train.json` | Run `make prepare` first |
 | `CUDA out of memory` | Reduce `per_device_train_batch_size` to 1 or 2 in the config |
-| `bitsandbytes CUDA setup failed` | Ensure CUDA toolkit version matches PyTorch build (check with `nvcc --version`) |
-| `wandb: ERROR` | Run `wandb login` or set `WANDB_API_KEY` env variable |
+| `bitsandbytes CUDA setup failed` | Ensure CUDA toolkit version matches PyTorch build (`nvcc --version`) |
+| `wandb: ERROR` | Run `wandb login` or set the `WANDB_API_KEY` environment variable |
+| Model download slow / fails | Set `HF_HUB_OFFLINE=1` and point `model.name_or_path` to a local cache path |
