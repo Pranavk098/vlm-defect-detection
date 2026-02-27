@@ -1,44 +1,34 @@
-FROM pytorch/pytorch:2.1.2-cuda12.1-cudnn8-devel
+# pytorch/pytorch:2.3.1 ships torch 2.3.1 which satisfies torch>=2.2 in pyproject.toml.
+FROM pytorch/pytorch:2.3.1-cuda12.1-cudnn8-devel
 
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    wget \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        git \
+        wget \
     && rm -rf /var/lib/apt/lists/*
 
-# Upgrade pip
 RUN pip install --upgrade pip
 
-# Install PyTorch dependencies (Matched to LLaVA requirements)
-# Note: Base image has torch 2.1.2 installed, but we ensure consistency
-RUN pip install torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cu121
+# ── Install package dependencies ─────────────────────────────────────────────
+# Copy only the manifest first so Docker caches this layer separately.
+COPY pyproject.toml ./
+COPY src/ ./src/
 
-# Install LLaVA Core Dependencies
-RUN pip install \
-    transformers==4.37.2 \
-    tokenizers==0.15.1 \
-    accelerate==0.27.2 \
-    peft==0.9.0 \
-    bitsandbytes>=0.43.0 \
-    gradio==4.16.0 \
-    shortuuid \
-    einops \
-    einops-exts \
-    timm \
-    openai-clip \
-    scikit-learn \
-    markdown2 \
-    protobuf \
-    sentencepiece \
-    requests \
-    pillow
+# torch is already satisfied by the base image; pip will skip reinstalling it.
+RUN pip install -e . --extra-index-url https://download.pytorch.org/whl/cu121
 
-# Flash Attention 2 and DeepSpeed skipped to reduce build time
-# Using standard PyTorch attention mechanism instead
+# ── Copy the rest of the project ─────────────────────────────────────────────
+COPY . .
 
-# Set environment variables for better offline capability
 ENV PYTHONUNBUFFERED=1
 
+# Default: interactive shell.
+# Override at runtime:
+#   docker run --gpus all --rm \
+#     -v $PWD/mvtec_anomaly_detection:/app/mvtec_anomaly_detection \
+#     -v $PWD/checkpoints:/app/checkpoints \
+#     -v $PWD/data:/app/data \
+#     vlm-defect-detection \
+#     python scripts/train.py configs/local_8gb.yaml
 CMD ["/bin/bash"]

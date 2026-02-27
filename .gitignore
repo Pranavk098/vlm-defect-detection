@@ -37,6 +37,10 @@ desktop.ini
 .vscode/
 .idea/
 
-# Logs (optional - remove these lines if you want to include logs)
-# error_log.txt
-# training-output.txt
+# Generated training data (rebuild with: make prepare)
+data/mvtec_train.json
+
+# Logs
+error_log.txt
+training-output.txt
+*.log

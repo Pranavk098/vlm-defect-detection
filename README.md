@@ -1,108 +1,111 @@
 # VLM Manufacturing Defect Detection
 
-Fine-tuned **LLaVA-1.5-7B** Vision-Language Model for automated manufacturing defect detection using the MVTec Anomaly Detection dataset.
+Fine-tune **LLaVA-1.5-7B** on the MVTec Anomaly Detection dataset to detect and describe manufacturing defects in industrial images.
 
-## Overview
-
-This project fine-tunes a Vision-Language Model (VLM) to identify and describe manufacturing defects in industrial products. The model can classify images as normal or defective and provide natural language descriptions of detected anomalies.
-
-## Project Structure
+## Project structure
 
 ```
-├── train_mvtec.py              # Main training script
-├── prepare_mvtec_json.py       # Dataset preparation - converts MVTec to LLaVA format
-├── mvtec_train.json            # Generated training data in LLaVA conversation format
-├── llava.ipynb                 # Inference & experimentation notebook
-├── LLaVA_Train_Colab.ipynb     # Google Colab training notebook
-├── LLaVA_ULTIMATE_FIX (1).ipynb # Debugging & fixes notebook
-├── VLM_LLaVA_Colab_Training (1).ipynb # Final Colab training pipeline
-├── Dockerfile                  # Docker setup for training environment
-├── run_docker_train.bat        # Docker training launch script
-├── setup_env.bat               # Local environment setup (Windows)
-├── setup_vlm_env.bat           # VLM-specific environment setup
-├── requirements.txt            # Python dependencies
-├── verify_install.py           # Installation verification script
-├── error_log.txt               # Training error logs
-├── training-output.txt         # Training output & metrics
-├── Vision-model-summary.docx   # Project summary document
-├── VLM_Product_Requirements_Document.*  # PRD (Word & PDF versions)
-└── .gitignore
+├── configs/
+│   └── local_8gb.yaml          # Training hyper-parameters (8 GB VRAM GPU)
+├── data/                       # Generated — created by make prepare (gitignored)
+│   └── mvtec_train.json
+├── docs/                       # PRD and project summary documents
+├── notebooks/
+│   ├── LLaVA_Train_Colab.ipynb
+│   ├── VLM_LLaVA_Colab_Training (1).ipynb
+│   └── ...
+├── scripts/
+│   ├── prepare_data.py         # Build data/mvtec_train.json from MVTec AD
+│   ├── train.py                # Launch LLaVA fine-tuning (reads YAML config)
+│   └── verify_install.py       # Sanity-check installed packages
+├── src/
+│   └── vlm_defect/
+│       └── __init__.py
+├── Dockerfile
+├── Makefile
+└── pyproject.toml
 ```
 
-## Tech Stack
+## Quick start
 
-- **Model**: LLaVA-1.5-7B (Vision-Language Model)
-- **Dataset**: [MVTec Anomaly Detection](https://www.mvtec.com/company/research/datasets/mvtec-ad)
-- **Framework**: PyTorch, Hugging Face Transformers
-- **Quantization**: 4-bit QLoRA via bitsandbytes
-- **Training**: Google Colab (GPU) / Docker (local)
-
-## Getting Started
-
-### Prerequisites
-
-- Python 3.10+
-- CUDA-compatible GPU (recommended: 16GB+ VRAM)
-- ~5GB disk space for MVTec dataset
-
-### Installation
+### 1. Clone & install
 
 ```bash
-# Clone the repository
-git clone https://github.com/YOUR_USERNAME/vlm-defect-detection.git
+git clone https://github.com/Pranavk098/vlm-defect-detection.git
 cd vlm-defect-detection
 
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# venv\Scripts\activate   # Windows
+# Clone LLaVA (needed for the training script)
+git clone https://github.com/haotian-liu/LLaVA.git
 
-# Install dependencies
-pip install -r requirements.txt
+# Install the package and all dependencies
+pip install -e .
 
-# Verify installation
-python verify_install.py
+# Optional: verify everything installed correctly
+make verify
 ```
 
-### Dataset Preparation
+> **Colab / recent PyTorch runtimes:** The dependency is `torch>=2.2` so Colab
+> runtimes shipping PyTorch 2.4+ work without any changes.
 
-1. Download the [MVTec AD dataset](https://www.mvtec.com/company/research/datasets/mvtec-ad)
-2. Extract to `mvtec_anomaly_detection/` directory
-3. Generate training JSON:
+### 2. Download the dataset
+
+Download [MVTec AD](https://www.mvtec.com/company/research/datasets/mvtec-ad) and
+extract it so you have `mvtec_anomaly_detection/` in the project root.
+
+### 3. Prepare training data
+
 ```bash
-python prepare_mvtec_json.py
+make prepare
+# or directly:
+python scripts/prepare_data.py --dataset-root mvtec_anomaly_detection --output data/mvtec_train.json
 ```
 
-### Training
+### 4. Train
 
-**Google Colab (Recommended):**
-Open `VLM_LLaVA_Colab_Training (1).ipynb` in Google Colab with a T4/A100 GPU runtime.
-
-**Local with Docker:**
 ```bash
-# Build and run
-run_docker_train.bat
+make train
+# or with a CLI override:
+make train OVERRIDE="training.report_to=wandb"
 ```
 
-**Local without Docker:**
+#### WandB logging
+
 ```bash
-python train_mvtec.py
+wandb login          # one-time setup
+make train OVERRIDE="training.report_to=wandb"
+# or permanently edit configs/local_8gb.yaml: report_to: "wandb"
 ```
 
-## Results
+### Docker
 
-*Add your training metrics, sample predictions, and evaluation results here.*
+```bash
+make docker-build
+make docker-train
+# with WandB:
+make docker-train OVERRIDE="training.report_to=wandb"
+```
 
-## Documentation
+## Configuration
 
-- `Vision-model-summary.docx` — Project summary and methodology
-- `VLM_Product_Requirements_Document` — Full product requirements
+All hyper-parameters live in `configs/local_8gb.yaml`.
+Any key can be overridden at the CLI without editing the file:
 
-## License
+```bash
+python scripts/train.py configs/local_8gb.yaml training.num_train_epochs=5 training.report_to=wandb
+```
 
-This project is for educational and research purposes.
+## Tech stack
 
-## Acknowledgments
+| Component | Choice |
+|-----------|--------|
+| Model | LLaVA-1.5-7B |
+| Dataset | MVTec Anomaly Detection |
+| Quantization | 4-bit QLoRA (bitsandbytes) |
+| Experiment tracking | WandB |
+| Training framework | PyTorch + Hugging Face Transformers |
+| Environment | Google Colab / Docker / local |
 
-- [LLaVA](https://github.com/haotian-liu/LLaVA) by Haotian Liu et al.
-- [MVTec AD Dataset](https://www.mvtec.com/company/research/datasets/mvtec-ad)
+## Acknowledgements
+
+- [LLaVA](https://github.com/haotian-liu/LLaVA) — Haotian Liu et al.
+- [MVTec AD](https://www.mvtec.com/company/research/datasets/mvtec-ad)
