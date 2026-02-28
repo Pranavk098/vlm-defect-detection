@@ -23,10 +23,10 @@ dependencies = [
 # Full training stack — use this for local or Colab training:
 #   pip install -e ".[train]"
 train = [
-    "transformers==4.37.2",
-    "tokenizers==0.15.1",
-    "accelerate==0.27.2",
-    "peft==0.9.0",
+    "transformers>=4.37.2",
+    "tokenizers>=0.15.1",
+    "accelerate>=0.27.2",
+    "peft>=0.9.0",
     "bitsandbytes>=0.41.3",
     "wandb>=0.16",
     "scikit-learn",
@@ -43,11 +43,11 @@ flash = [
 # Inference only — no bitsandbytes, no training deps:
 #   pip install -e ".[inference]"
 inference = [
-    "transformers==4.37.2",
-    "tokenizers==0.15.1",
-    "accelerate==0.27.2",
-    "peft==0.9.0",
-    "gradio==4.16.0",
+    "transformers>=4.37.2",
+    "tokenizers>=0.15.1",
+    "accelerate>=0.27.2",
+    "peft>=0.9.0",
+    "gradio>=4.16.0",
     "sentencepiece",
 ]
 
