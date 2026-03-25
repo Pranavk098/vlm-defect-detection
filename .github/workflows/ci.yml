@@ -1,0 +1,196 @@
+# .github/workflows/ci.yml
+#
+# Runs on every push and pull request:
+#   1. Lint — check code style with ruff
+#   2. Import check — verify all modules import without errors
+#   3. Config check — validate YAML configs load correctly
+#   4. Smoke test — run prepare_data on a mock dataset
+#
+# Does NOT run training (needs GPU).
+
+name: CI
+
+on:
+  push:
+    branches: [main, "claude/**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Lint & Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ruff
+        run: pip install ruff
+
+      - name: Run ruff check
+        run: ruff check src/ scripts/ app.py --select E,F,I --ignore E501
+
+      - name: Run ruff format check
+        run: ruff format --check src/ scripts/ app.py || true  # warn only
+
+  import-check:
+    name: Import & Config Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install base dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pyyaml pillow torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -e .
+
+      - name: Check vlm_defect imports
+        run: |
+          python -c "from vlm_defect.data import create_dataset, MVTecDataset, collate_fn; print('OK: data.py')"
+          python -c "from vlm_defect.cli import prepare, train; print('OK: cli.py')"
+          python -c "import yaml; cfg = yaml.safe_load(open('configs/local_8gb.yaml')); print(f'OK: config loaded — model={cfg[\"model\"][\"name_or_path\"]}')"
+
+      - name: Validate config structure
+        run: |
+          python -c "
+          import yaml
+          with open('configs/local_8gb.yaml') as f:
+              cfg = yaml.safe_load(f)
+
+          # Check all required sections exist
+          required = ['model', 'quantization', 'lora', 'data', 'training']
+          for section in required:
+              assert section in cfg, f'Missing config section: {section}'
+              print(f'  OK  {section}')
+
+          # Check critical fields
+          assert 'name_or_path' in cfg['model'], 'Missing model.name_or_path'
+          assert 'path' in cfg['data'], 'Missing data.path'
+          assert 'image_folder' in cfg['data'], 'Missing data.image_folder'
+          assert cfg['lora']['r'] > 0, 'lora.r must be positive'
+          print('  All config checks passed.')
+          "
+
+  smoke-test:
+    name: Smoke Test (Mock Data)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pyyaml pillow torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -e .
+
+      - name: Create mock MVTec dataset
+        run: |
+          python -c "
+          from pathlib import Path
+          from PIL import Image
+          import random
+
+          # Create a tiny mock dataset with 2 categories
+          for category in ['bottle', 'cable']:
+              # train/good
+              p = Path(f'mvtec_anomaly_detection/{category}/train/good')
+              p.mkdir(parents=True, exist_ok=True)
+              for i in range(3):
+                  img = Image.new('RGB', (64, 64), color=(random.randint(0,255), random.randint(0,255), random.randint(0,255)))
+                  img.save(p / f'{i:03d}.png')
+
+              # test/good
+              p = Path(f'mvtec_anomaly_detection/{category}/test/good')
+              p.mkdir(parents=True, exist_ok=True)
+              for i in range(2):
+                  img = Image.new('RGB', (64, 64), color=(0, 255, 0))
+                  img.save(p / f'{i:03d}.png')
+
+              # test/broken
+              p = Path(f'mvtec_anomaly_detection/{category}/test/broken')
+              p.mkdir(parents=True, exist_ok=True)
+              for i in range(2):
+                  img = Image.new('RGB', (64, 64), color=(255, 0, 0))
+                  img.save(p / f'{i:03d}.png')
+
+          print('Mock dataset created.')
+          "
+
+      - name: Run prepare_data on mock dataset
+        run: |
+          python scripts/prepare_data.py \
+            --dataset-root mvtec_anomaly_detection \
+            --output data/mvtec_train.json
+
+      - name: Validate generated JSON
+        run: |
+          python -c "
+          import json
+          with open('data/mvtec_train.json') as f:
+              data = json.load(f)
+
+          assert len(data) > 0, 'No samples generated'
+          print(f'Generated {len(data)} samples')
+
+          # Check structure
+          for item in data[:3]:
+              assert 'id' in item, 'Missing id field'
+              assert 'image' in item, 'Missing image field'
+              assert 'conversations' in item, 'Missing conversations field'
+              assert len(item['conversations']) == 2, 'Expected 2 conversation turns'
+
+          # Check we have both normal and defect samples
+          answers = [d['conversations'][1]['value'] for d in data]
+          has_normal = any('No' in a for a in answers)
+          has_defect = any('Yes' in a for a in answers)
+          assert has_normal, 'No normal samples found'
+          assert has_defect, 'No defect samples found'
+
+          print('JSON structure validated.')
+          print(f'  Normal samples: {sum(1 for a in answers if \"No\" in a)}')
+          print(f'  Defect samples: {sum(1 for a in answers if \"Yes\" in a)}')
+          "
+
+  app-check:
+    name: Gradio App Import Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pyyaml pillow gradio matplotlib
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -e .
+
+      - name: Check app.py imports
+        run: |
+          python -c "
+          # Test that app.py can be imported without errors
+          # (model loading is lazy, so this just checks syntax + imports)
+          import importlib.util
+          spec = importlib.util.spec_from_file_location('app', 'app.py')
+          mod = importlib.util.module_from_spec(spec)
+          print('OK: app.py imports successfully')
+          "

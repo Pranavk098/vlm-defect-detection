@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # VLM Manufacturing Defect Detection
 
 Fine-tuned **LLaVA-1.5-7B** Vision-Language Model for automated manufacturing defect detection using the MVTec Anomaly Detection dataset.
@@ -106,3 +107,6 @@ This project is for educational and research purposes.
 
 - [LLaVA](https://github.com/haotian-liu/LLaVA) by Haotian Liu et al.
 - [MVTec AD Dataset](https://www.mvtec.com/company/research/datasets/mvtec-ad)
+=======
+# vlm-defect-detection
+>>>>>>> 23016f2a11537b9e1eeaf38da90dbe70e76b452b
