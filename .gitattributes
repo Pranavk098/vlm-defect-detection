@@ -1,0 +1,18 @@
+# Normalize line endings to LF in the repository, checkout as-is on Windows
+* text=auto eol=lf
+*.py text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf
+*.toml text eol=lf
+*.sh text eol=lf
+Makefile text eol=lf
+
+# Binaries — no line-ending conversion
+*.png binary
+*.jpg binary
+*.pdf binary
+*.docx binary
+*.bin binary
+*.safetensors binary
+*.pt binary
+*.pth binary

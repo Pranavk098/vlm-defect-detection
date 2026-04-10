@@ -1,0 +1,54 @@
+# Virtual environments
+venv/
+venv_vlm/
+.venv/
+.env
+
+# Model checkpoints & weights (too large for GitHub)
+checkpoints/
+*.pt
+*.pth
+*.bin
+*.safetensors
+
+# Dataset folders
+mvtec_anomaly_detection/
+
+# Cloned repos (reference in README instead)
+LLaVA/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# Generated training data (rebuild with: make prepare)
+data/mvtec_train.json
+data/mvtec_test.json
+
+# WandB runs
+wandb/
+
+# Logs
+error_log.txt
+training-output.txt
+*.log
+
+# Failure case dumps
+failures.json
