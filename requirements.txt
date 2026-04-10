@@ -1,0 +1,29 @@
+--extra-index-url https://download.pytorch.org/whl/cu121
+
+# Core PyTorch (Pinned to 2.2.2 for compatibility with LLaVA/Transformers)
+torch==2.2.2
+torchvision==0.17.2
+torchaudio==2.2.2
+
+# LLaVA Core Dependencies
+transformers==4.37.2
+tokenizers==0.15.1
+accelerate==0.27.2
+peft==0.9.0
+bitsandbytes==0.41.3.post2
+# Note: bitsandbytes often needs a windows-specific compiled version or 'bitsandbytes-windows' if the official one fails.
+# Using standard for now, but might need adjustment.
+
+# Other dependencies
+gradio==4.16.0
+shortuuid
+einops
+einops-exts
+timm
+openai-clip
+scikit-learn
+markdown2
+protobuf
+sentencepiece
+requests
+pillow
