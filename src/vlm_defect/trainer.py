@@ -35,11 +35,10 @@ import numpy as np
 import torch
 import yaml
 from torch.utils.data import DataLoader
-from transformers import Trainer, TrainerCallback, TrainingArguments, EvalPrediction
+from transformers import EvalPrediction, Trainer, TrainerCallback, TrainingArguments
 
 from vlm_defect.data import collate_fn, load_split, make_weighted_sampler
 from vlm_defect.model import load_model_and_processor
-
 
 # ---------------------------------------------------------------------------
 # WandB loss display fix

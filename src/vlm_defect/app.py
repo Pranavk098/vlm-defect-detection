@@ -26,6 +26,13 @@ import torch
 import torch.nn.functional as F
 from PIL import Image, ImageFilter
 
+# Import shared constants and constrained-vocab matcher from evaluate module
+from vlm_defect.evaluate import (
+    CATEGORY_DEFECT_TYPES,
+    CATEGORY_THRESHOLDS,
+    _constrained_defect_name,
+    _extract_defect_name,
+)
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -36,26 +43,6 @@ CATEGORIES = [
     "hazelnut", "leather", "metal_nut", "pill", "screw",
     "tile", "toothbrush", "transistor", "wood", "zipper",
 ]
-
-# Per-category P(Yes) thresholds from the v3 checkpoint-500 sweep.
-# These are the same values used in evaluate.py CATEGORY_THRESHOLDS.
-CATEGORY_THRESHOLDS: dict[str, float] = {
-    "bottle":     0.20,
-    "cable":      0.25,
-    "capsule":    0.30,
-    "carpet":     0.15,
-    "grid":       0.15,
-    "hazelnut":   0.20,
-    "leather":    0.40,
-    "metal_nut":  0.50,
-    "pill":       0.25,
-    "screw":      0.40,
-    "tile":       0.50,
-    "toothbrush": 0.80,
-    "transistor": 0.40,
-    "wood":       0.30,
-    "zipper":     0.40,
-}
 
 # Global fallback threshold (optimal from v3 sweep)
 DEFAULT_THRESHOLD = 0.25
@@ -98,8 +85,12 @@ def _load_from_hub(repo_id: str):
 def _load_from_checkpoint(checkpoint: Path, config: Path):
     """Load base model + LoRA adapter from a local checkpoint."""
     import yaml
-    from transformers import AutoProcessor, BitsAndBytesConfig, LlavaForConditionalGeneration
     from peft import PeftModel
+    from transformers import (
+        AutoProcessor,
+        BitsAndBytesConfig,
+        LlavaForConditionalGeneration,
+    )
 
     with open(config) as f:
         cfg = yaml.safe_load(f)
@@ -163,8 +154,6 @@ def compute_attention_overlay(
     try:
         import matplotlib
         matplotlib.use("Agg")
-        import matplotlib.pyplot as plt
-        from matplotlib.colors import LinearSegmentedColormap
     except ImportError:
         return None
 
@@ -305,8 +294,18 @@ def run_inference(
         skip_special_tokens=True,
     ).strip()
 
+    # Post-hoc constrained defect naming: remap free-form output to nearest
+    # known label from the category vocabulary (fixes "scratch" mode collapse)
+    constrained_defect: str | None = None
+    if is_anomaly:
+        raw_defect = _extract_defect_name(description)
+        if raw_defect:
+            constrained_label, c_score = _constrained_defect_name(raw_defect, category)
+            if constrained_label:
+                constrained_defect = f"{constrained_label} (confidence: {c_score:.2f})"
+
     label = "Anomaly detected" if is_anomaly else "No anomaly detected"
-    return label, round(confidence, 4), description, round(yes_prob * 100, 1), round(no_prob * 100, 1), is_anomaly
+    return label, round(confidence, 4), description, round(yes_prob * 100, 1), round(no_prob * 100, 1), is_anomaly, constrained_defect
 
 
 # ---------------------------------------------------------------------------
@@ -336,7 +335,7 @@ def build_interface(model, processor):
             return "Please upload an image.", "—", "—", None
 
         # Run binary classification
-        label, confidence, description, yes_pct, no_pct, is_anomaly = run_inference(
+        label, confidence, description, yes_pct, no_pct, is_anomaly, constrained_defect = run_inference(
             image, model, processor, category, threshold
         )
 
@@ -346,8 +345,15 @@ def build_interface(model, processor):
             f"{icon} **{label}**\n\n"
             f"- Confidence: **{confidence:.1%}**\n"
             f"- P(Yes): `{yes_pct:.1f}%`  |  P(No): `{no_pct:.1f}%`\n"
-            f"- Threshold: `{threshold:.2f}` (category default: `{CATEGORY_THRESHOLDS.get(category, DEFAULT_THRESHOLD):.2f}`)"
+            f"- Threshold: `{threshold:.2f}` "
+            f"(category default: `{CATEGORY_THRESHOLDS.get(category, DEFAULT_THRESHOLD):.2f}`)\n"
         )
+        if is_anomaly and constrained_defect:
+            known = ", ".join(CATEGORY_DEFECT_TYPES.get(category, []))
+            verdict += (
+                f"- Closest defect type: **{constrained_defect}**\n"
+                f"- Known {category} defects: `{known}`"
+            )
 
         # Compute attention overlay (may return None if unsupported)
         attn_img = compute_attention_overlay(image, model, processor, category)
@@ -443,7 +449,7 @@ def build_interface(model, processor):
             "LLaVA-1.5-7B. Category-aware prompts, centre-crop augmentation for "
             "small-defect categories, and per-category detection thresholds are "
             "applied at inference time to match training conditions exactly.\n\n"
-            "Global metrics on MVTec test split: **F1=0.834 · Recall=0.943 · ROC-AUC=0.896**"
+            "Global metrics on MVTec test split (per-category thresholds): **F1=0.887 · Recall=0.940 · ROC-AUC=0.896**"
         )
 
     return demo

@@ -108,8 +108,8 @@ def main() -> None:
     #    standard HuggingFace model, which is what users expect when they
     #    download it from the Hub.
     # ------------------------------------------------------------------
-    from transformers import LlavaForConditionalGeneration
     from peft import PeftModel
+    from transformers import LlavaForConditionalGeneration
 
     device_map = args.device if args.device != "auto" else "auto"
 

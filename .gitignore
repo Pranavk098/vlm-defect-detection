@@ -54,3 +54,7 @@ training-output.txt
 
 # Failure case dumps
 failures.json
+
+# Generated evaluation artefacts
+eval_dashboard.html
+*.html

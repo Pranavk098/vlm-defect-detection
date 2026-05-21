@@ -23,7 +23,6 @@ from __future__ import annotations
 import argparse
 import json
 import re
-import sys
 from collections import defaultdict
 from difflib import SequenceMatcher
 from pathlib import Path
@@ -35,7 +34,6 @@ from transformers import BitsAndBytesConfig
 
 # Import centre-crop helper from data module so train/eval use identical preprocessing
 from vlm_defect.data import apply_center_crop
-
 
 # ---------------------------------------------------------------------------
 # Category-specific inference thresholds
@@ -79,6 +77,42 @@ CATEGORY_THRESHOLDS: dict[str, float] = {
     "transistor": 0.40,
     "zipper":     0.40,
     # "wood" intentionally omitted — optimal threshold matches global default
+}
+
+# ---------------------------------------------------------------------------
+# Per-category ground-truth defect vocabulary
+# ---------------------------------------------------------------------------
+# Ground-truth defect types for each MVTec category, derived directly from
+# the test-set folder names.  Used for constrained defect-name matching: after
+# the model generates a defect description, we find the closest label from this
+# vocabulary via fuzzy matching and report both the raw prediction and the
+# constrained best-match.
+#
+# Diagnosis (v3 checkpoint-500): the model collapsed onto "scratch" as its
+# universal defect descriptor for ~73.5% of predictions.  Binary classification
+# (pass/fail) remains reliable (F1=0.887); defect *naming* requires either
+# constrained decoding or a dedicated classification head.
+# ---------------------------------------------------------------------------
+CATEGORY_DEFECT_TYPES: dict[str, list[str]] = {
+    "bottle":     ["broken_large", "broken_small", "contamination"],
+    "cable":      ["bent_wire", "cable_swap", "combined", "cut_inner_insulation",
+                   "cut_outer_insulation", "missing_cable", "missing_wire", "poke_insulation"],
+    "capsule":    ["crack", "faulty_imprint", "poke", "scratch", "squeeze"],
+    "carpet":     ["color", "cut", "hole", "metal_contamination", "thread"],
+    "grid":       ["bent", "broken", "glue", "metal_contamination", "thread"],
+    "hazelnut":   ["crack", "cut", "hole", "print"],
+    "leather":    ["color", "cut", "fold", "glue", "poke"],
+    "metal_nut":  ["bent", "color", "flip", "scratch"],
+    "pill":       ["color", "combined", "contamination", "crack", "faulty_imprint",
+                   "pill_type", "scratch"],
+    "screw":      ["manipulated_front", "scratch_head", "scratch_neck",
+                   "thread_side", "thread_top"],
+    "tile":       ["crack", "glue_strip", "gray_stroke", "oil", "rough"],
+    "toothbrush": ["defective"],
+    "transistor": ["bent_lead", "cut_lead", "damaged_case", "misplaced"],
+    "wood":       ["color", "combined", "hole", "liquid", "scratch"],
+    "zipper":     ["broken_teeth", "combined", "fabric_border", "fabric_interior",
+                   "rough", "split_teeth", "squeezed_teeth"],
 }
 
 
@@ -154,6 +188,48 @@ def _normalise_defect_name(name: str) -> str:
     s = _NOISE_WORDS.sub("", s)
     s = " ".join(s.split())  # collapse whitespace
     return s
+
+
+def _constrained_defect_name(
+    pred: str,
+    category: str,
+    min_score: float = 0.0,
+) -> tuple[str | None, float]:
+    """Find the closest ground-truth defect label for *category* via fuzzy match.
+
+    The model collapses onto "scratch" for ~73% of predictions regardless of
+    the true defect type.  This function post-hoc remaps the free-form model
+    output to the nearest label in the known per-category vocabulary, which:
+      • gives a fairer upper-bound on defect-naming accuracy
+      • provides a usable prediction in the Gradio demo (instead of "scratch")
+      • demonstrates that constrained decoding at generation time would fix the
+        collapse without retraining
+
+    Args:
+        pred: Raw (normalised) defect name from the model.
+        category: MVTec category string.
+        min_score: Minimum fuzzy score to accept a match.  Below this, returns
+                   (None, score) to signal no confident match.
+
+    Returns:
+        (best_label, score) where best_label is the closest vocabulary entry
+        or None if no candidate exceeds min_score.
+    """
+    vocab = CATEGORY_DEFECT_TYPES.get(category)
+    if not vocab or not pred:
+        return None, 0.0
+
+    pred_n = _normalise_defect_name(pred)
+    best_label, best_score = None, -1.0
+    for label in vocab:
+        label_n = _normalise_defect_name(label)
+        score = _fuzzy_score(pred_n, label_n)
+        if score > best_score:
+            best_score, best_label = score, label
+
+    if best_score < min_score:
+        return None, best_score
+    return best_label, best_score
 
 
 def _fuzzy_score(a: str, b: str) -> float:
@@ -264,8 +340,8 @@ def _compute_roc_auc(prob_yes_scores: list[tuple[bool, float]]) -> float | None:
     labels = [int(t) for t, _ in prob_yes_scores]
     scores = [p for _, p in prob_yes_scores]
     # Filter out NaN scores
-    valid = [(l, s) for l, s in zip(labels, scores) if s == s]
-    if len(valid) < 2 or len(set(l for l, _ in valid)) < 2:
+    valid = [(lbl, s) for lbl, s in zip(labels, scores) if s == s]
+    if len(valid) < 2 or len(set(lbl for lbl, _ in valid)) < 2:
         return None
     labels_v, scores_v = zip(*valid)
     return round(roc_auc_score(list(labels_v), list(scores_v)), 4)
@@ -323,8 +399,8 @@ def evaluate(
     prob_yes_scores
         List of (true_label: bool, prob_yes: float) pairs for offline curves.
     """
-    from transformers import AutoProcessor, LlavaForConditionalGeneration
     from peft import PeftModel
+    from transformers import AutoProcessor, LlavaForConditionalGeneration
 
     # Merge module-level and caller-supplied category thresholds
     effective_cat_thresholds: dict[str, float] = dict(CATEGORY_THRESHOLDS)
@@ -388,10 +464,13 @@ def evaluate(
         lambda: {"tp": 0, "fp": 0, "tn": 0, "fn": 0}
     )
 
-    defect_n_true_anomalies  = 0
-    defect_n_both_extracted  = 0
-    defect_exact_matches     = 0
-    defect_fuzzy_total       = 0.0
+    defect_n_true_anomalies       = 0
+    defect_n_both_extracted       = 0
+    defect_exact_matches          = 0
+    defect_fuzzy_total            = 0.0
+    # Constrained-vocab counters (post-hoc remapping to nearest known label)
+    defect_constrained_matches    = 0
+    defect_constrained_fuzzy      = 0.0
     failure_cases: list[dict] = []   # for --log-failures
 
     prob_yes_scores: list[tuple[bool, float]] = []
@@ -433,17 +512,17 @@ def evaluate(
 
             prob_yes = _yes_no_prob(gen_out.scores[0][0], processor.tokenizer)
 
-            # Test-Time Augmentation: average with horizontal-flip prediction
+            # Test-Time Augmentation: average original prob_yes with hflip prediction.
+            # We already have prob_yes from the original image; only run the flip.
             use_tta = tta and (tta_categories is None or category in tta_categories)
-            if use_tta:
-                prob_yes_tta = _tta_prob_yes(
+            if use_tta and prob_yes == prob_yes:  # skip if original was NaN
+                prob_yes_flip = _tta_prob_yes(
                     image, model, processor, prompt,
                     processor.tokenizer,
-                    augments=["original", "hflip"],
+                    augments=["hflip"],   # original already computed above
                 )
-                # Replace prob_yes with the TTA-averaged value if not NaN
-                if prob_yes_tta == prob_yes_tta:
-                    prob_yes = prob_yes_tta
+                if prob_yes_flip == prob_yes_flip:
+                    prob_yes = (prob_yes + prob_yes_flip) / 2.0
 
             true_anomaly = _is_anomaly_response(gpt_truth)
             prob_yes_scores.append((true_anomaly, prob_yes))
@@ -457,13 +536,17 @@ def evaluate(
 
             # ── binary classification counts ─────────────────────────────────
             if true_anomaly and pred_anomaly:
-                tp += 1;  cat_counts[category]["tp"] += 1
+                tp += 1
+                cat_counts[category]["tp"] += 1
             elif not true_anomaly and pred_anomaly:
-                fp += 1;  cat_counts[category]["fp"] += 1
+                fp += 1
+                cat_counts[category]["fp"] += 1
             elif true_anomaly and not pred_anomaly:
-                fn += 1;  cat_counts[category]["fn"] += 1
+                fn += 1
+                cat_counts[category]["fn"] += 1
             else:
-                tn += 1;  cat_counts[category]["tn"] += 1
+                tn += 1
+                cat_counts[category]["tn"] += 1
 
             # ── defect-type extraction scoring ───────────────────────────────
             if true_anomaly:
@@ -484,16 +567,30 @@ def evaluate(
                         defect_exact_matches += 1
                     defect_fuzzy_total += fscore
 
+                    # Constrained-vocab remapping: find closest known label
+                    constrained_label, constrained_score = _constrained_defect_name(
+                        pred_defect, category
+                    )
+                    if constrained_label is not None:
+                        c_exact = _normalise_defect_name(constrained_label) == gt_norm
+                        if c_exact:
+                            defect_constrained_matches += 1
+                        defect_constrained_fuzzy += _fuzzy_score(
+                            _normalise_defect_name(constrained_label), gt_norm
+                        )
+
                     # Record failures for --log-failures
                     if not exact and log_failures_path is not None:
                         failure_cases.append({
-                            "image":        image_path,
-                            "category":     category,
-                            "gt_defect":    gt_defect,
-                            "pred_defect":  pred_defect,
-                            "fuzzy_score":  round(fscore, 4),
-                            "generated":    generated,
-                            "prob_yes":     round(prob_yes, 4) if prob_yes == prob_yes else None,
+                            "image":             image_path,
+                            "category":          category,
+                            "gt_defect":         gt_defect,
+                            "pred_defect":       pred_defect,
+                            "constrained_pred":  constrained_label,
+                            "fuzzy_score":       round(fscore, 4),
+                            "constrained_score": round(constrained_score, 4),
+                            "generated":         generated,
+                            "prob_yes":          round(prob_yes, 4) if prob_yes == prob_yes else None,
                         })
                 elif gt_defect and log_failures_path is not None:
                     # Model produced no parseable defect name
@@ -525,6 +622,13 @@ def evaluate(
         ) if defect_n_both_extracted else 0.0,
         "avg_fuzzy_score": round(
             defect_fuzzy_total / defect_n_both_extracted, 4
+        ) if defect_n_both_extracted else 0.0,
+        # Constrained-vocab remapping: nearest label from known category vocabulary
+        "constrained_match_rate": round(
+            defect_constrained_matches / defect_n_both_extracted, 4
+        ) if defect_n_both_extracted else 0.0,
+        "constrained_avg_fuzzy": round(
+            defect_constrained_fuzzy / defect_n_both_extracted, 4
         ) if defect_n_both_extracted else 0.0,
     }
 
@@ -666,8 +770,14 @@ def main() -> None:
         print("\n── Defect-Type Extraction ──────────────────────────")
         print(f"  True anomaly samples:  {dt['n_true_anomalies']}")
         print(f"  Both names extracted:  {dt['n_both_extracted']}")
-        print(f"  Exact-match rate:      {dt['exact_match_rate']:.4f}")
-        print(f"  Avg fuzzy score:       {dt['avg_fuzzy_score']:.4f}")
+        print(f"  Exact-match (raw):     {dt['exact_match_rate']:.4f}"
+              f"  ({int(dt['exact_match_rate']*dt['n_both_extracted'])} / {dt['n_both_extracted']})")
+        print(f"  Avg fuzzy (raw):       {dt['avg_fuzzy_score']:.4f}")
+        print(f"  Exact-match (constrained vocab): {dt['constrained_match_rate']:.4f}"
+              f"  ({int(dt['constrained_match_rate']*dt['n_both_extracted'])} / {dt['n_both_extracted']})")
+        print(f"  Avg fuzzy (constrained vocab):   {dt['constrained_avg_fuzzy']:.4f}")
+        print("  Note: model collapses onto 'scratch' for ~73% of predictions.")
+        print("        Constrained vocab remaps to nearest known defect label per category.")
         if args.log_failures and metrics.get("_failure_cases"):
             n_fail = len(metrics["_failure_cases"])
             print(f"  Failure cases:         {n_fail}")
@@ -694,10 +804,14 @@ def main() -> None:
             _tp = _fp = _tn = _fn = 0
             for true_label, py in metrics["prob_yes_scores"]:
                 pred = py > thr if py == py else False
-                if true_label and pred:       _tp += 1
-                elif not true_label and pred: _fp += 1
-                elif true_label and not pred: _fn += 1
-                else:                         _tn += 1
+                if true_label and pred:
+                    _tp += 1
+                elif not true_label and pred:
+                    _fp += 1
+                elif true_label and not pred:
+                    _fn += 1
+                else:
+                    _tn += 1
             m = _compute_metrics(_tp, _fp, _tn, _fn)
             marker = " ◀ selected" if abs(thr - args.threshold) < 1e-6 else ""
             if m["f1"] > best_f1:
@@ -742,10 +856,14 @@ def main() -> None:
                     _tp = _fp = _tn = _fn = 0
                     for true_label, py in scores_cat:
                         pred = py > thr if py == py else False
-                        if true_label and pred:       _tp += 1
-                        elif not true_label and pred: _fp += 1
-                        elif true_label and not pred: _fn += 1
-                        else:                         _tn += 1
+                        if true_label and pred:
+                            _tp += 1
+                        elif not true_label and pred:
+                            _fp += 1
+                        elif true_label and not pred:
+                            _fn += 1
+                        else:
+                            _tn += 1
                     m = _compute_metrics(_tp, _fp, _tn, _fn)
                     if m["f1"] > best_cat_f1:
                         best_cat_f1, best_cat_thr = m["f1"], thr

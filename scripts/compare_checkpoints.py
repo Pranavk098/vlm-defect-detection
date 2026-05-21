@@ -34,7 +34,6 @@ import json
 import re
 from pathlib import Path
 
-
 METRICS = ["accuracy", "precision", "recall", "f1"]
 COLUMN_WIDTHS = {
     "step":      6,

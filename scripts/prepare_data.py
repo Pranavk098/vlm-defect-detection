@@ -2,10 +2,11 @@
 """Thin wrapper — delegates to vlm_defect.data.
 
 Usage:
-    python scripts/prepare_data.py                            # defaults
-    python scripts/prepare_data.py --dataset-root /data/mvtec --output data/mvtec_train.json
-    make prepare                                              # via Makefile
-    vlm-prepare                                              # installed entrypoint
+    python scripts/prepare_data.py                                          # defaults
+    python scripts/prepare_data.py --dataset-root /data/mvtec-ad \\
+        --output-train data/mvtec_train.json --output-test data/mvtec_test.json
+    make prepare                                                             # via Makefile
+    vlm-prepare                                                              # installed entrypoint
 """
 
 from vlm_defect.data import main

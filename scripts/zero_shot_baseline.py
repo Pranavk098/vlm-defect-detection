@@ -33,8 +33,13 @@ from pathlib import Path
 import torch
 import yaml
 from PIL import Image
-from transformers import AutoProcessor, BitsAndBytesConfig, LlavaForConditionalGeneration
+from transformers import (
+    AutoProcessor,
+    BitsAndBytesConfig,
+    LlavaForConditionalGeneration,
+)
 
+from vlm_defect.data import apply_center_crop
 from vlm_defect.evaluate import (
     CATEGORY_THRESHOLDS,
     _compute_metrics,
@@ -43,7 +48,6 @@ from vlm_defect.evaluate import (
     _save_confusion_heatmap,
     _yes_no_prob,
 )
-from vlm_defect.data import apply_center_crop
 
 
 def _make_prompt(category: str) -> str:
@@ -146,13 +150,17 @@ def run_zero_shot(
                 pred_anomaly = prob_yes > cat_thr
 
             if true_anomaly and pred_anomaly:
-                tp += 1;  cat_counts[category]["tp"] += 1
+                tp += 1
+                cat_counts[category]["tp"] += 1
             elif not true_anomaly and pred_anomaly:
-                fp += 1;  cat_counts[category]["fp"] += 1
+                fp += 1
+                cat_counts[category]["fp"] += 1
             elif true_anomaly and not pred_anomaly:
-                fn += 1;  cat_counts[category]["fn"] += 1
+                fn += 1
+                cat_counts[category]["fn"] += 1
             else:
-                tn += 1;  cat_counts[category]["tn"] += 1
+                tn += 1
+                cat_counts[category]["tn"] += 1
 
             if (idx + 1) % 50 == 0:
                 print(f"  {idx + 1}/{len(records)} evaluated...")
@@ -262,10 +270,14 @@ def main() -> None:
             _tp = _fp = _tn = _fn = 0
             for true_label, py in metrics["prob_yes_scores"]:
                 pred = py > thr if py == py else False
-                if true_label and pred:       _tp += 1
-                elif not true_label and pred: _fp += 1
-                elif true_label and not pred: _fn += 1
-                else:                         _tn += 1
+                if true_label and pred:
+                    _tp += 1
+                elif not true_label and pred:
+                    _fp += 1
+                elif true_label and not pred:
+                    _fn += 1
+                else:
+                    _tn += 1
             m = _cm(_tp, _fp, _tn, _fn)
             if m["f1"] > best_f1:
                 best_f1, best_thr = m["f1"], thr

@@ -8,7 +8,11 @@ from __future__ import annotations
 
 import torch
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
-from transformers import AutoProcessor, BitsAndBytesConfig, LlavaForConditionalGeneration
+from transformers import (
+    AutoProcessor,
+    BitsAndBytesConfig,
+    LlavaForConditionalGeneration,
+)
 
 
 def load_model_and_processor(cfg: dict) -> tuple:
