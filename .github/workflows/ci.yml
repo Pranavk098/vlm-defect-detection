@@ -32,10 +32,10 @@ jobs:
         run: pip install ruff
 
       - name: Run ruff check
-        run: ruff check src/ scripts/ app.py --select E,F,I --ignore E501
+        run: ruff check src/ scripts/ --select E,F,I --ignore E501
 
       - name: Run ruff format check
-        run: ruff format --check src/ scripts/ app.py || true  # warn only
+        run: ruff format --check src/ scripts/ || true  # warn only
 
   import-check:
     name: Import & Config Check
