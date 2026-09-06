@@ -1,0 +1,154 @@
+# RTX 5070-laptop 8GB profile — LLaVA-1.5-7B QLoRA on MVTec AD ( Arm B / primary ).
+#
+# WHAT THIS IS
+#   A Windows-safe, 8GB-VRAM-safe copy of configs/local_8gb.yaml (v3) tuned for
+#   an RTX 5070 laptop (~8GB VRAM, ~8GB RAM budget). Run this arm FIRST — it is
+#   the only arm that fits 8GB without offload tricks.
+#   Full recipe (commands, VRAM curve, resume, eval, time estimates):
+#     docs/RTX5070_8GB_RECIPE.md
+#
+# WHAT CHANGED vs configs/local_8gb.yaml (v3)
+#   1. dataloader_num_workers: 4 → 0.  num_workers>0 frequently hangs or
+#      crashes on Windows (spawn + WeightedRandomSampler, no fork). 0 is the
+#      safe Windows default; cost is ~5-10% slower batch loading.
+#   2. num_train_epochs: 5 → 3.  Matches the ablation arms
+#      (configs/lora_r16|qlora_4bit|dora_r16.yaml, all 3 epochs) so the
+#      LoRA-vs-QLoRA-vs-DoRA comparison is fair, and fits a laptop time budget.
+#      For the final best-F1 run, override to 5:
+#        python scripts/train.py configs/rtx5070_8gb.yaml training.num_train_epochs=5
+#   3. output_dir → checkpoints/llava-mvtec-qlora-rtx5070 (fresh dir, never
+#      overwrites the v3 dir checkpoints/llava-mvtec-lora-v3).
+#   4. Added report_to default "none" (v3 defaults to "wandb", which errors
+#      without `wandb login`). Override per-run instead of editing the file.
+#   Everything else (4-bit NF4 + double quant, LoRA r=16 on attn+MLP,
+#   yes_token_weight=2.0, category_weights, 1×16 effective batch,
+#   grad-checkpointing, bf16→fp16 auto-fallback, F1-based checkpointing)
+#   is inherited unchanged from v3.
+#
+# WHAT v3 DELIBERATELY DOES *NOT* DO (8GB gaps — see recipe doc §1)
+#   - No paged/adamw_8bit optimizer. src/vlm_defect/trainer.py builds
+#     TrainingArguments WITHOUT an `optim` arg, so HF's default AdamW
+#     (fp32 m+v on ~40M LoRA params only, ~0.3GB) is used. Paged 8-bit would
+#     save ~0.2GB and smooth spikes; needs a one-line trainer patch.
+#   - No flash-attn / xFormers / SDPA pinning. src/vlm_defect/model.py does not
+#     pass attn_implementation, so HF defaults apply (SDPA on torch>=2.0).
+#   - No Unsloth fast kernels (not LLaVA-compatible in this codebase path).
+#   - No DeepSpeed ZeRO offload (single-GPU laptop: PCIe offload latency
+#     exceeds the gain at this model size; pager + accum covers it).
+#   - Vision tower (CLIP ViT-L/14) + LLM frozen; ONLY LoRA adapters train
+#     (prepare_model_for_kbit_training freezes base). mm_projector trains
+#     only if LoRA targets it — it does not (attn+MLP of the LLM only).
+#
+# EXPECTED PEAK VRAM, THIS ARM (measured-estimate breakdown, §3 of recipe doc)
+#   base 4-bit NF4 weights ~3.9GB + LoRA params/grads/optim ~0.5GB
+#   + activations (bs=1, ~730 tok, grad-ckpt ON) ~1.5-2.0GB
+#   + eval-spike reservation ~0.5GB + CUDA context ~0.6GB
+#   ≈ 6.5-7.5GB peak → fits 8GB with ~0.5-1.5GB headroom.
+#
+# OTHER ARMS (same file + CLI override — DO NOT run Arm A on 8GB)
+#   Arm A (LoRA fp16, no quant — needs ≥16GB, run on Colab T4/A100, batch halved):
+#     python scripts/train.py configs/rtx5070_8gb.yaml \
+#       quantization.bits=16 lora.r=16 lora.alpha=32 \
+#       training.output_dir=checkpoints/llava-mvtec-lora-r16-rtx5070 \
+#       training.per_device_train_batch_size=1 training.gradient_accumulation_steps=16
+#     NOTE: quantization.bits=16 still routes through BitsAndBytesConfig with
+#     load_in_4bit=False in model.py — numerically fp16/bf16 path, fine.
+#   Arm C (QDoRA r=16 — needs peft>=0.9 AND a one-line model.py patch:
+#     add use_dora=True to the LoraConfig in src/vlm_defect/model.py):
+#     python scripts/train.py configs/rtx5070_8gb.yaml \
+#       training.output_dir=checkpoints/llava-mvtec-qdora-r16-rtx5070
+#     (after patching model.py to honour lora.use_dora below)
+#   Fallback if 7B OOMs (TinyLLaVA-3.1B / MobileVLM-3B class — different
+#   codebase path, see recipe doc §6, NOT this config):
+#     model.name_or_path: tinyllava/TinyLLaVA-Phi-2-SigLIP-3.1B
+#
+# For WandB logging, pass training.report_to=wandb per-run (no file edit).
+
+method: qlora
+seed: 42   # data split seed (load_split) + sampler seed; trainer runs single-seed
+
+model:
+  name_or_path: "llava-hf/llava-1.5-7b-hf"   # HF Hub — no clone required
+
+quantization:
+  bits: 4
+  double_quant: true
+  quant_type: "nf4"
+
+lora:
+  enable: true
+  r: 16             # rank — ablation parity with Arm A/C (Arm B legacy used r=64; v3 uses r=16)
+  alpha: 32         # 2 × r
+  dropout: 0.05
+  # use_dora: false  # UNCOMMENT + patch src/vlm_defect/model.py LoraConfig(use_dora=...) for Arm C
+  target_modules:   # v3: full attention + MLP for richer visual reasoning
+    - q_proj        # query projection (attention)
+    - v_proj        # value projection (attention)
+    - k_proj        # key projection (attention)
+    - o_proj        # output projection (attention)
+    - gate_proj     # MLP gate
+    - up_proj       # MLP up-projection
+    - down_proj     # MLP down-projection
+
+data:
+  # Generated by: python scripts/train.py path (runs scripts/prepare_data.py first)
+  #   python scripts/prepare_data.py --dataset-root mvtec_anomaly_detection \
+  #     --output-train data/mvtec_train.json --output-test data/mvtec_test.json \
+  #     --anomaly-train-fraction 0.65
+  path: "data/mvtec_train.json"
+  image_folder: "mvtec_anomaly_detection"
+  val_fraction: 0.1        # 10% held-out validation split
+  anomaly_train_fraction: 0.65   # must match the prepare_data invocation above
+
+# ── Class balancing ───────────────────────────────────────────────────────────
+# v2's no_token_weight=2.7 over-predicted "No" (FN=269, FP=1). v3 flips the
+# strategy: upweight "Yes" response tokens so misses cost more than false alarms.
+class_balance:
+  no_token_weight: 1.0    # DISABLED — was hurting recall in v2
+  yes_token_weight: 2.0   # upweight "Yes" tokens to improve recall
+
+# ── Category-level oversampling ───────────────────────────────────────────────
+# v2 F1 failures carried forward: transistor 0.095, screw 0.123, capsule 0.250,
+# pill 0.554, cable 0.676.
+category_weights:
+  transistor: 4.0
+  screw:      4.0
+  capsule:    3.0
+  pill:       2.5
+  cable:      2.0
+
+training:
+  output_dir: "checkpoints/llava-mvtec-qlora-rtx5070"   # fresh dir — never overwrites v3
+  num_train_epochs: 3   # ablation parity; override to 5 for the final best-F1 run
+  per_device_train_batch_size: 1       # keep at 1 to fit 8 GB VRAM
+  per_device_eval_batch_size: 1
+  gradient_accumulation_steps: 16      # effective batch = 16 (matches v3 + ablation arms)
+  bf16: true   # trainer auto-falls back to fp16 if GPU lacks bf16 (RTX 5070 has bf16)
+  tf32: true
+  evaluation_strategy: "steps"
+  eval_steps: 100
+  save_strategy: "steps"
+  save_steps: 100
+  save_total_limit: 3
+  load_best_model_at_end: true
+  metric_for_best_model: "f1"   # v3: select checkpoint by F1, not eval_loss
+  greater_is_better: true
+  learning_rate: 1.0e-4   # v3 value. For strict ablation parity use 2.0e-4:
+                          #   ... training.learning_rate=0.0002
+  weight_decay: 0.01
+  warmup_ratio: 0.05
+  lr_scheduler_type: "cosine"
+  logging_steps: 1
+  model_max_length: 2048
+  gradient_checkpointing: true   # ~30-50% activation VRAM saving, ~20% slower — mandatory on 8GB
+  dataloader_num_workers: 0   # v3 used 4; 0 is the Windows-safe value (no fork/spawn hangs)
+  report_to: "none"   # per-run override: training.report_to=wandb (after `wandb login`)
+  # optim: "paged_adamw_8bit"   # DOCUMENTED INTENT ONLY — trainer.py ignores it today.
+                                # Needs: optim=t.get("optim","adamw_torch") wired into
+                                # TrainingArguments. Saves ~0.2GB + absorbs eval spikes.
+
+notes: >
+  Primary 8GB arm (Arm B / QLoRA r=16). Windows resume:
+  python scripts/train.py configs/rtx5070_8gb.yaml --resume
+  (or --resume <checkpoint-dir>). Eval each arm after training — see
+  docs/RTX5070_8GB_RECIPE.md §4. Do NOT run Arm A (fp16 LoRA) on this GPU.

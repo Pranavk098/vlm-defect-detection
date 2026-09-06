@@ -65,3 +65,42 @@ python scripts/eval_mvtec.py --eval-file eval_test.json --preds eval_outputs/pre
 - H2: DoRA ≥ LoRA on grounding IoU (direction+magnitude helps localization).
 - H3: All arms score rationale keyword-hit > single-sentence rate (models
   name defects but ramble) — motivating the one-sentence prompt constraint.
+
+## Post-training checklist (RTX 5070 8GB 2nd cycle — do in order, check off)
+
+> Primary profile is now `configs/rtx5070_8gb.yaml` (Arm B, Windows-safe).
+> Legacy `configs/{lora_r16,qlora_4bit,dora_r16}.yaml` use the OLD schema
+> (`train_file`/`eval_file`, `liuhaotian/llava-v1.5-7b` base) and do NOT plug
+> into `src/vlm_defect/trainer.py` directly — use the override commands in
+> `docs/RTX5070_8GB_RECIPE.md` §3 instead. Threshold/TTA flags below refer to
+> `src/vlm_defect/evaluate.py`.
+
+- [ ] **(a) Merge LoRA + push to Hub** — best ckpt per arm (see
+  `trainer_state.json` → `best_model_checkpoint`):
+  ```powershell
+  python scripts/push_to_hub.py --checkpoint checkpoints/llava-mvtec-qlora-rtx5070/checkpoint-NNN `
+    --repo-id <user>/llava-mvtec-defect-detection --config configs/rtx5070_8gb.yaml --device cpu
+  ```
+  `--device cpu` is REQUIRED on 8GB (bf16 merge needs ~14GB; CPU RAM covers
+  it). Then verify parity: `vlm-app --repo-id <user>/llava-mvtec-defect-detection`
+  vs local ckpt on 5 probe images. Never commit `*.safetensors`/`*.bin`.
+- [ ] **(b) Gradio demo — 15-class gallery + failure cases:**
+  `vlm-app --repo-id <repo>` (or `--checkpoint <ckpt> --config
+  configs/rtx5070_8gb.yaml`); gallery covers all 15 MVTec categories
+  (`app/demo.py` category list); add a failure-case tab sourced from
+  `eval_outputs/failures_<arm>.json` (`evaluate.py --log-failures`).
+  Screenshot + repo link go into `REPORT_template.md` §5.
+- [ ] **(c) Ablation table** — one row per arm (LoRA r16 / QLoRA r16 / QDoRA r16):
+  text-acc (normal/defective), mean per-class AUROC, F1/recall/precision,
+  ROC-AUC, rationale mean (0–3), grounding det-rate@0.5, peak VRAM,
+  wall-clock. Template lives in `REPORT_template.md` §4.1; hypotheses H1–H3
+  verdicts recorded with deltas, not vibes.
+- [ ] **(d) Grounding demo IoU@0.5** — `eval_mvtec.py --preds
+  eval_outputs/preds_<arm>.json --grounding-file mvtec_grounding_200.json`;
+  report mean IoU + detection-rate@IoU≥0.5 as a **box-level PRO proxy** (never
+  as pixel-PRO — text-only VLM emits no anomaly maps).
+- [ ] **(e) REPORT.md** — copy `REPORT_template.md` → `REPORT.md`, fill every
+  `[FILL]`, record commit hash + `nvidia-smi` peak + wall-clock per arm,
+  freeze Arm-B thresholds before scoring Arm C (anti-leakage), list threats
+  (§6) honestly. Metrics JSONs (`eval_outputs/results_<arm>.json`) committed;
+  weights never committed.
