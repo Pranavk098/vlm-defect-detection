@@ -1,0 +1,18 @@
+# Inference-only image. Training stays in ./Dockerfile (torch + LLaVA + bitsandbytes).
+# This image is deliberately slim: no torch/transformers/LLaVA, just the API + demo.
+# Real-model inference mounts weights at runtime:  -e VLM_CHECKPOINT_DIR=/weights -v <ckpt>:/weights
+FROM python:3.11-slim
+
+WORKDIR /srv
+
+RUN pip install --no-cache-dir fastapi==0.110.0 uvicorn==0.29.0 gradio==4.16.0 \
+    pillow numpy requests python-multipart
+
+COPY app/ ./app/
+COPY prompts/ ./prompts/
+
+ENV VLM_API_URL=http://localhost:8000
+EXPOSE 8000 7860
+
+# API on :8000; run the gallery with: docker exec <c> python app/demo.py
+CMD ["uvicorn", "app.server:app", "--host", "0.0.0.0", "--port", "8000"]

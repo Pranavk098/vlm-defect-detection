@@ -1,0 +1,49 @@
+# Arm B — QLoRA 4-bit (NF4 + double quant). Current default training path.
+# Fixed across all arms: 3 epochs, lr 2e-4, seed 42, cosine, warmup 0.03.
+method: qlora
+
+model:
+  name_or_path: liuhaotian/llava-v1.5-7b
+  vision_tower: openai/clip-vit-large-patch14-336
+  mm_projector_type: mlp2x_gelu
+  model_max_length: 2048
+
+quantization:
+  bits: 4
+  double_quant: true
+  quant_type: nf4
+  compute_dtype: bfloat16
+
+lora:
+  r: 64
+  alpha: 128      # alpha = 2x r, same ratio in every arm
+  dropout: 0.05
+  bias: none
+  target_modules: all-linear  # LLaVA find_all_linear_names()
+
+training:
+  num_train_epochs: 3
+  learning_rate: 2.0e-04
+  per_device_train_batch_size: 4
+  gradient_accumulation_steps: 4
+  warmup_ratio: 0.03
+  lr_scheduler_type: cosine
+  bf16: true
+  gradient_checkpointing: true
+  eval_steps: 100
+  save_steps: 100
+  load_best_model_at_end: true
+  metric_for_best_model: eval_loss
+  greater_is_better: false
+  output_dir: checkpoints/llava-mvtec-qlora-4bit
+
+data:
+  train_file: mvtec_train.json            # decontaminate: drop ids present in eval_test.json
+  eval_file: eval_test.json
+  image_folder: mvtec_anomaly_detection
+
+seed: 42
+
+notes: >
+  Fits a single T4-16GB (Colab free tier) with gradient checkpointing on.
+  Launch: python train_mvtec.py --config configs/qlora_4bit.yaml

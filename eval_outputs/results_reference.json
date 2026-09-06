@@ -1,0 +1,121 @@
+{
+  "summary": {
+    "n_eval": 1069,
+    "n_scored": 1069,
+    "n_unparseable": 0,
+    "mock": false,
+    "has_predictions": true,
+    "text_accuracy": 1.0,
+    "normal_accuracy": 1.0,
+    "defective_accuracy": 1.0,
+    "mean_per_class_auroc": 1.0,
+    "pro": null,
+    "pro_note": "Pixel-level PRO needs anomaly maps, which a text-only VLM does not emit; see grounding detection-rate @IoU>=0.5 as proxy."
+  },
+  "per_class": {
+    "bottle": {
+      "n": 58,
+      "accuracy": 1.0,
+      "auroc": 1.0,
+      "auroc_note": ""
+    },
+    "cable": {
+      "n": 75,
+      "accuracy": 1.0,
+      "auroc": 1.0,
+      "auroc_note": ""
+    },
+    "capsule": {
+      "n": 70,
+      "accuracy": 1.0,
+      "auroc": 1.0,
+      "auroc_note": ""
+    },
+    "carpet": {
+      "n": 79,
+      "accuracy": 1.0,
+      "auroc": 1.0,
+      "auroc_note": ""
+    },
+    "grid": {
+      "n": 68,
+      "accuracy": 1.0,
+      "auroc": 1.0,
+      "auroc_note": ""
+    },
+    "hazelnut": {
+      "n": 100,
+      "accuracy": 1.0,
+      "auroc": 1.0,
+      "auroc_note": ""
+    },
+    "leather": {
+      "n": 74,
+      "accuracy": 1.0,
+      "auroc": 1.0,
+      "auroc_note": ""
+    },
+    "metal_nut": {
+      "n": 67,
+      "accuracy": 1.0,
+      "auroc": 1.0,
+      "auroc_note": ""
+    },
+    "pill": {
+      "n": 87,
+      "accuracy": 1.0,
+      "auroc": 1.0,
+      "auroc_note": ""
+    },
+    "screw": {
+      "n": 96,
+      "accuracy": 1.0,
+      "auroc": 1.0,
+      "auroc_note": ""
+    },
+    "tile": {
+      "n": 69,
+      "accuracy": 1.0,
+      "auroc": 1.0,
+      "auroc_note": ""
+    },
+    "toothbrush": {
+      "n": 20,
+      "accuracy": 1.0,
+      "auroc": 1.0,
+      "auroc_note": ""
+    },
+    "transistor": {
+      "n": 63,
+      "accuracy": 1.0,
+      "auroc": 1.0,
+      "auroc_note": ""
+    },
+    "wood": {
+      "n": 65,
+      "accuracy": 1.0,
+      "auroc": 1.0,
+      "auroc_note": ""
+    },
+    "zipper": {
+      "n": 78,
+      "accuracy": 1.0,
+      "auroc": 1.0,
+      "auroc_note": ""
+    }
+  },
+  "rationale": {
+    "n": 272,
+    "mean_score_0_3": 3.0,
+    "keyword_hit_rate": 1.0,
+    "single_sentence_rate": 1.0,
+    "no_wrong_defect_rate": 1.0
+  },
+  "grounding": {
+    "n": 0,
+    "mean_iou": null,
+    "detection_rate_at_iou": null,
+    "iou_threshold": 0.5,
+    "note": "no grounding preds scored"
+  }
+}

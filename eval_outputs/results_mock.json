@@ -1,0 +1,121 @@
+{
+  "summary": {
+    "n_eval": 1069,
+    "n_scored": 1069,
+    "n_unparseable": 0,
+    "mock": true,
+    "has_predictions": true,
+    "text_accuracy": 0.7455565949485501,
+    "normal_accuracy": 1.0,
+    "defective_accuracy": 0.0,
+    "mean_per_class_auroc": 0.5,
+    "pro": null,
+    "pro_note": "Pixel-level PRO needs anomaly maps, which a text-only VLM does not emit; see grounding detection-rate @IoU>=0.5 as proxy."
+  },
+  "per_class": {
+    "bottle": {
+      "n": 58,
+      "accuracy": 0.7413793103448276,
+      "auroc": 0.5,
+      "auroc_note": ""
+    },
+    "cable": {
+      "n": 75,
+      "accuracy": 0.8,
+      "auroc": 0.5,
+      "auroc_note": ""
+    },
+    "capsule": {
+      "n": 70,
+      "accuracy": 0.6571428571428571,
+      "auroc": 0.5,
+      "auroc_note": ""
+    },
+    "carpet": {
+      "n": 79,
+      "accuracy": 0.7088607594936709,
+      "auroc": 0.5,
+      "auroc_note": ""
+    },
+    "grid": {
+      "n": 68,
+      "accuracy": 0.7794117647058824,
+      "auroc": 0.5,
+      "auroc_note": ""
+    },
+    "hazelnut": {
+      "n": 100,
+      "accuracy": 0.86,
+      "auroc": 0.5,
+      "auroc_note": ""
+    },
+    "leather": {
+      "n": 74,
+      "accuracy": 0.7837837837837838,
+      "auroc": 0.5,
+      "auroc_note": ""
+    },
+    "metal_nut": {
+      "n": 67,
+      "accuracy": 0.6268656716417911,
+      "auroc": 0.5,
+      "auroc_note": ""
+    },
+    "pill": {
+      "n": 87,
+      "accuracy": 0.6436781609195402,
+      "auroc": 0.5,
+      "auroc_note": ""
+    },
+    "screw": {
+      "n": 96,
+      "accuracy": 0.7083333333333334,
+      "auroc": 0.5,
+      "auroc_note": ""
+    },
+    "tile": {
+      "n": 69,
+      "accuracy": 0.7101449275362319,
+      "auroc": 0.5,
+      "auroc_note": ""
+    },
+    "toothbrush": {
+      "n": 20,
+      "accuracy": 0.7,
+      "auroc": 0.5,
+      "auroc_note": ""
+    },
+    "transistor": {
+      "n": 63,
+      "accuracy": 0.8253968253968254,
+      "auroc": 0.5,
+      "auroc_note": ""
+    },
+    "wood": {
+      "n": 65,
+      "accuracy": 0.8153846153846154,
+      "auroc": 0.5,
+      "auroc_note": ""
+    },
+    "zipper": {
+      "n": 78,
+      "accuracy": 0.782051282051282,
+      "auroc": 0.5,
+      "auroc_note": ""
+    }
+  },
+  "rationale": {
+    "n": 272,
+    "mean_score_0_3": 2.0,
+    "keyword_hit_rate": 0.0,
+    "single_sentence_rate": 1.0,
+    "no_wrong_defect_rate": 1.0
+  },
+  "grounding": {
+    "n": 0,
+    "mean_iou": null,
+    "detection_rate_at_iou": null,
+    "iou_threshold": 0.5,
+    "note": "no grounding preds scored"
+  }
+}

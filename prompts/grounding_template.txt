@@ -1,0 +1,2 @@
+<image>
+Locate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence.

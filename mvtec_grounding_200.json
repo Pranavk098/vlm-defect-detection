@@ -1,0 +1,4602 @@
+[
+  {
+    "id": "41c623f9-3177-410a-a216-5b4406e4c2b0",
+    "image": "toothbrush/test/defective/022.png",
+    "mask": "toothbrush/ground_truth/defective/022_mask.png",
+    "category": "toothbrush",
+    "defect": "defective",
+    "bbox_1000": [
+      273,
+      104,
+      727,
+      592
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [273, 104, 727, 592]. There is a defective defect at [273, 104, 727, 592]."
+      }
+    ]
+  },
+  {
+    "id": "c52eee54-093b-468e-9320-69642e03893f",
+    "image": "grid/test/bent/002.png",
+    "mask": "grid/ground_truth/bent/002_mask.png",
+    "category": "grid",
+    "defect": "bent",
+    "bbox_1000": [
+      419,
+      232,
+      964,
+      819
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [419, 232, 964, 819]. There is a bent defect at [419, 232, 964, 819]."
+      }
+    ]
+  },
+  {
+    "id": "fd0d2361-af5d-4b31-bc8b-267b92b56adc",
+    "image": "screw/test/scratch_head/016.png",
+    "mask": "screw/ground_truth/scratch_head/016_mask.png",
+    "category": "screw",
+    "defect": "scratch_head",
+    "bbox_1000": [
+      838,
+      553,
+      876,
+      626
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [838, 553, 876, 626]. There is a scratch_head defect at [838, 553, 876, 626]."
+      }
+    ]
+  },
+  {
+    "id": "391adbba-0b3c-4de6-be42-3aa6541c59c0",
+    "image": "cable/test/missing_wire/003.png",
+    "mask": "cable/ground_truth/missing_wire/003_mask.png",
+    "category": "cable",
+    "defect": "missing_wire",
+    "bbox_1000": [
+      474,
+      216,
+      707,
+      690
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [474, 216, 707, 690]. There is a missing_wire defect at [474, 216, 707, 690]."
+      }
+    ]
+  },
+  {
+    "id": "6225e027-3ef5-46c5-b06f-8e1ad3f1c85f",
+    "image": "pill/test/color/018.png",
+    "mask": "pill/ground_truth/color/018_mask.png",
+    "category": "pill",
+    "defect": "color",
+    "bbox_1000": [
+      765,
+      488,
+      811,
+      536
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [765, 488, 811, 536]. There is a color defect at [765, 488, 811, 536]."
+      }
+    ]
+  },
+  {
+    "id": "e8814f95-cc44-4481-93cf-dfe7b4da37a8",
+    "image": "hazelnut/test/print/002.png",
+    "mask": "hazelnut/ground_truth/print/002_mask.png",
+    "category": "hazelnut",
+    "defect": "print",
+    "bbox_1000": [
+      454,
+      322,
+      643,
+      684
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [454, 322, 643, 684]. There is a print defect at [454, 322, 643, 684]."
+      }
+    ]
+  },
+  {
+    "id": "3033065f-88de-47b3-9485-21aa28059886",
+    "image": "wood/test/hole/009.png",
+    "mask": "wood/ground_truth/hole/009_mask.png",
+    "category": "wood",
+    "defect": "hole",
+    "bbox_1000": [
+      143,
+      182,
+      780,
+      314
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [143, 182, 780, 314]. There is a hole defect at [143, 182, 780, 314]."
+      }
+    ]
+  },
+  {
+    "id": "4cc6efb4-2738-4234-b193-b2d931c2d94d",
+    "image": "cable/test/bent_wire/000.png",
+    "mask": "cable/ground_truth/bent_wire/000_mask.png",
+    "category": "cable",
+    "defect": "bent_wire",
+    "bbox_1000": [
+      206,
+      445,
+      486,
+      661
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [206, 445, 486, 661]. There is a bent_wire defect at [206, 445, 486, 661]."
+      }
+    ]
+  },
+  {
+    "id": "5d3ffc3d-5a7e-476f-afc4-898b61b5a163",
+    "image": "zipper/test/fabric_interior/014.png",
+    "mask": "zipper/ground_truth/fabric_interior/014_mask.png",
+    "category": "zipper",
+    "defect": "fabric_interior",
+    "bbox_1000": [
+      245,
+      580,
+      390,
+      726
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [245, 580, 390, 726]. There is a fabric_interior defect at [245, 580, 390, 726]."
+      }
+    ]
+  },
+  {
+    "id": "a92a8270-f13a-40d1-b3f2-c0e72f950ef1",
+    "image": "capsule/test/scratch/009.png",
+    "mask": "capsule/ground_truth/scratch/009_mask.png",
+    "category": "capsule",
+    "defect": "scratch",
+    "bbox_1000": [
+      590,
+      368,
+      790,
+      446
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [590, 368, 790, 446]. There is a scratch defect at [590, 368, 790, 446]."
+      }
+    ]
+  },
+  {
+    "id": "4df7e3d9-b2ee-49c8-a22f-eb7f5921f8e9",
+    "image": "screw/test/manipulated_front/021.png",
+    "mask": "screw/ground_truth/manipulated_front/021_mask.png",
+    "category": "screw",
+    "defect": "manipulated_front",
+    "bbox_1000": [
+      854,
+      193,
+      909,
+      241
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [854, 193, 909, 241]. There is a manipulated_front defect at [854, 193, 909, 241]."
+      }
+    ]
+  },
+  {
+    "id": "11973159-3193-48d9-b1f2-67efc2e24538",
+    "image": "zipper/test/split_teeth/009.png",
+    "mask": "zipper/ground_truth/split_teeth/009_mask.png",
+    "category": "zipper",
+    "defect": "split_teeth",
+    "bbox_1000": [
+      407,
+      427,
+      520,
+      723
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [407, 427, 520, 723]. There is a split_teeth defect at [407, 427, 520, 723]."
+      }
+    ]
+  },
+  {
+    "id": "20e011ae-8e89-45cf-8b89-8cc88fffe982",
+    "image": "tile/test/glue_strip/015.png",
+    "mask": "tile/ground_truth/glue_strip/015_mask.png",
+    "category": "tile",
+    "defect": "glue_strip",
+    "bbox_1000": [
+      640,
+      382,
+      952,
+      685
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [640, 382, 952, 685]. There is a glue_strip defect at [640, 382, 952, 685]."
+      }
+    ]
+  },
+  {
+    "id": "6b7c5c9e-0b8e-458b-b809-a685e5e73bdc",
+    "image": "grid/test/metal_contamination/005.png",
+    "mask": "grid/ground_truth/metal_contamination/005_mask.png",
+    "category": "grid",
+    "defect": "metal_contamination",
+    "bbox_1000": [
+      532,
+      191,
+      623,
+      283
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [532, 191, 623, 283]. There is a metal_contamination defect at [532, 191, 623, 283]."
+      }
+    ]
+  },
+  {
+    "id": "63e4a436-e4b4-44f2-adcb-768eea06f1f9",
+    "image": "transistor/test/cut_lead/008.png",
+    "mask": "transistor/ground_truth/cut_lead/008_mask.png",
+    "category": "transistor",
+    "defect": "cut_lead",
+    "bbox_1000": [
+      583,
+      588,
+      756,
+      880
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [583, 588, 756, 880]. There is a cut_lead defect at [583, 588, 756, 880]."
+      }
+    ]
+  },
+  {
+    "id": "98af6a9e-8504-490f-9982-0c8b6369c6f8",
+    "image": "capsule/test/faulty_imprint/020.png",
+    "mask": "capsule/ground_truth/faulty_imprint/020_mask.png",
+    "category": "capsule",
+    "defect": "faulty_imprint",
+    "bbox_1000": [
+      718,
+      470,
+      777,
+      546
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [718, 470, 777, 546]. There is a faulty_imprint defect at [718, 470, 777, 546]."
+      }
+    ]
+  },
+  {
+    "id": "d3bd170e-1c0e-4ba5-aeeb-c59dbc99aa8e",
+    "image": "zipper/test/split_teeth/006.png",
+    "mask": "zipper/ground_truth/split_teeth/006_mask.png",
+    "category": "zipper",
+    "defect": "split_teeth",
+    "bbox_1000": [
+      416,
+      70,
+      576,
+      318
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [416, 70, 576, 318]. There is a split_teeth defect at [416, 70, 576, 318]."
+      }
+    ]
+  },
+  {
+    "id": "2a778fe5-7570-439f-914e-b34d445058ed",
+    "image": "hazelnut/test/print/005.png",
+    "mask": "hazelnut/ground_truth/print/005_mask.png",
+    "category": "hazelnut",
+    "defect": "print",
+    "bbox_1000": [
+      314,
+      196,
+      665,
+      319
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [314, 196, 665, 319]. There is a print defect at [314, 196, 665, 319]."
+      }
+    ]
+  },
+  {
+    "id": "2758179d-ae48-4f18-a705-ff297140130a",
+    "image": "cable/test/poke_insulation/003.png",
+    "mask": "cable/ground_truth/poke_insulation/003_mask.png",
+    "category": "cable",
+    "defect": "poke_insulation",
+    "bbox_1000": [
+      320,
+      743,
+      624,
+      873
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [320, 743, 624, 873]. There is a poke_insulation defect at [320, 743, 624, 873]."
+      }
+    ]
+  },
+  {
+    "id": "2172ab2e-9116-42e6-b24b-4b545b6d09e1",
+    "image": "wood/test/scratch/010.png",
+    "mask": "wood/ground_truth/scratch/010_mask.png",
+    "category": "wood",
+    "defect": "scratch",
+    "bbox_1000": [
+      168,
+      85,
+      772,
+      999
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [168, 85, 772, 999]. There is a scratch defect at [168, 85, 772, 999]."
+      }
+    ]
+  },
+  {
+    "id": "0a9ff661-2a60-4d0f-8714-8d91140c7ddb",
+    "image": "transistor/test/bent_lead/003.png",
+    "mask": "transistor/ground_truth/bent_lead/003_mask.png",
+    "category": "transistor",
+    "defect": "bent_lead",
+    "bbox_1000": [
+      491,
+      724,
+      599,
+      869
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [491, 724, 599, 869]. There is a bent_lead defect at [491, 724, 599, 869]."
+      }
+    ]
+  },
+  {
+    "id": "063ff51a-1c46-4f1a-b7c9-e3ffa5ba81ff",
+    "image": "zipper/test/squeezed_teeth/006.png",
+    "mask": "zipper/ground_truth/squeezed_teeth/006_mask.png",
+    "category": "zipper",
+    "defect": "squeezed_teeth",
+    "bbox_1000": [
+      485,
+      770,
+      567,
+      875
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [485, 770, 567, 875]. There is a squeezed_teeth defect at [485, 770, 567, 875]."
+      }
+    ]
+  },
+  {
+    "id": "71fa1783-c66a-4b33-86b0-541c92c8ca73",
+    "image": "toothbrush/test/defective/017.png",
+    "mask": "toothbrush/ground_truth/defective/017_mask.png",
+    "category": "toothbrush",
+    "defect": "defective",
+    "bbox_1000": [
+      458,
+      323,
+      778,
+      865
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [458, 323, 778, 865]. There is a defective defect at [458, 323, 778, 865]."
+      }
+    ]
+  },
+  {
+    "id": "b3f37bdf-2ca5-4e81-8002-40be1cf9c7ef",
+    "image": "metal_nut/test/bent/006.png",
+    "mask": "metal_nut/ground_truth/bent/006_mask.png",
+    "category": "metal_nut",
+    "defect": "bent",
+    "bbox_1000": [
+      61,
+      557,
+      190,
+      731
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [61, 557, 190, 731]. There is a bent defect at [61, 557, 190, 731]."
+      }
+    ]
+  },
+  {
+    "id": "b807d53f-b838-4c10-ab0b-3d9f9bbc9df2",
+    "image": "tile/test/rough/000.png",
+    "mask": "tile/ground_truth/rough/000_mask.png",
+    "category": "tile",
+    "defect": "rough",
+    "bbox_1000": [
+      386,
+      395,
+      654,
+      706
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [386, 395, 654, 706]. There is a rough defect at [386, 395, 654, 706]."
+      }
+    ]
+  },
+  {
+    "id": "c2309d4b-5856-4803-bcf1-733bc1949a6e",
+    "image": "capsule/test/poke/020.png",
+    "mask": "capsule/ground_truth/poke/020_mask.png",
+    "category": "capsule",
+    "defect": "poke",
+    "bbox_1000": [
+      579,
+      444,
+      648,
+      518
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [579, 444, 648, 518]. There is a poke defect at [579, 444, 648, 518]."
+      }
+    ]
+  },
+  {
+    "id": "edbec612-6c6d-4c38-b0ac-0512a895cbe8",
+    "image": "hazelnut/test/hole/003.png",
+    "mask": "hazelnut/ground_truth/hole/003_mask.png",
+    "category": "hazelnut",
+    "defect": "hole",
+    "bbox_1000": [
+      407,
+      527,
+      533,
+      664
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [407, 527, 533, 664]. There is a hole defect at [407, 527, 533, 664]."
+      }
+    ]
+  },
+  {
+    "id": "dc38fd51-1fd9-4e4a-912c-db9827844d69",
+    "image": "tile/test/gray_stroke/007.png",
+    "mask": "tile/ground_truth/gray_stroke/007_mask.png",
+    "category": "tile",
+    "defect": "gray_stroke",
+    "bbox_1000": [
+      188,
+      404,
+      585,
+      769
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [188, 404, 585, 769]. There is a gray_stroke defect at [188, 404, 585, 769]."
+      }
+    ]
+  },
+  {
+    "id": "35a525a5-ba71-4b4b-8635-6a61adaea6de",
+    "image": "screw/test/scratch_neck/005.png",
+    "mask": "screw/ground_truth/scratch_neck/005_mask.png",
+    "category": "screw",
+    "defect": "scratch_neck",
+    "bbox_1000": [
+      537,
+      538,
+      703,
+      670
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [537, 538, 703, 670]. There is a scratch_neck defect at [537, 538, 703, 670]."
+      }
+    ]
+  },
+  {
+    "id": "fa944db3-2965-4f88-88fa-b7d6549bf27b",
+    "image": "capsule/test/scratch/008.png",
+    "mask": "capsule/ground_truth/scratch/008_mask.png",
+    "category": "capsule",
+    "defect": "scratch",
+    "bbox_1000": [
+      591,
+      504,
+      728,
+      619
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [591, 504, 728, 619]. There is a scratch defect at [591, 504, 728, 619]."
+      }
+    ]
+  },
+  {
+    "id": "e50ec4a0-cb95-4ab6-a2d8-be053a3b877f",
+    "image": "carpet/test/thread/008.png",
+    "mask": "carpet/ground_truth/thread/008_mask.png",
+    "category": "carpet",
+    "defect": "thread",
+    "bbox_1000": [
+      134,
+      598,
+      832,
+      914
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [134, 598, 832, 914]. There is a thread defect at [134, 598, 832, 914]."
+      }
+    ]
+  },
+  {
+    "id": "56e28540-90d7-49d4-abbe-c5ec8c77c187",
+    "image": "capsule/test/scratch/005.png",
+    "mask": "capsule/ground_truth/scratch/005_mask.png",
+    "category": "capsule",
+    "defect": "scratch",
+    "bbox_1000": [
+      602,
+      468,
+      641,
+      575
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [602, 468, 641, 575]. There is a scratch defect at [602, 468, 641, 575]."
+      }
+    ]
+  },
+  {
+    "id": "67213af3-0571-4fbb-b0c0-b0df2e35982a",
+    "image": "metal_nut/test/color/015.png",
+    "mask": "metal_nut/ground_truth/color/015_mask.png",
+    "category": "metal_nut",
+    "defect": "color",
+    "bbox_1000": [
+      310,
+      236,
+      704,
+      529
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [310, 236, 704, 529]. There is a color defect at [310, 236, 704, 529]."
+      }
+    ]
+  },
+  {
+    "id": "2575d060-fb97-4cfd-834e-5d84c5dca93c",
+    "image": "cable/test/cut_outer_insulation/006.png",
+    "mask": "cable/ground_truth/cut_outer_insulation/006_mask.png",
+    "category": "cable",
+    "defect": "cut_outer_insulation",
+    "bbox_1000": [
+      119,
+      274,
+      392,
+      428
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [119, 274, 392, 428]. There is a cut_outer_insulation defect at [119, 274, 392, 428]."
+      }
+    ]
+  },
+  {
+    "id": "88c99648-fcd7-4fc6-b0cd-fca675b1aa81",
+    "image": "hazelnut/test/print/006.png",
+    "mask": "hazelnut/ground_truth/print/006_mask.png",
+    "category": "hazelnut",
+    "defect": "print",
+    "bbox_1000": [
+      355,
+      461,
+      552,
+      782
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [355, 461, 552, 782]. There is a print defect at [355, 461, 552, 782]."
+      }
+    ]
+  },
+  {
+    "id": "2aaa28e1-70c6-4817-8df2-1b7655f50a2f",
+    "image": "cable/test/cut_inner_insulation/004.png",
+    "mask": "cable/ground_truth/cut_inner_insulation/004_mask.png",
+    "category": "cable",
+    "defect": "cut_inner_insulation",
+    "bbox_1000": [
+      464,
+      355,
+      737,
+      663
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [464, 355, 737, 663]. There is a cut_inner_insulation defect at [464, 355, 737, 663]."
+      }
+    ]
+  },
+  {
+    "id": "1eadaa39-e9ad-4729-854f-35bbb1f0b05f",
+    "image": "hazelnut/test/cut/011.png",
+    "mask": "hazelnut/ground_truth/cut/011_mask.png",
+    "category": "hazelnut",
+    "defect": "cut",
+    "bbox_1000": [
+      357,
+      422,
+      518,
+      596
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [357, 422, 518, 596]. There is a cut defect at [357, 422, 518, 596]."
+      }
+    ]
+  },
+  {
+    "id": "6e1f6edd-5e9f-4130-8b19-df57b6dc98d5",
+    "image": "carpet/test/hole/007.png",
+    "mask": "carpet/ground_truth/hole/007_mask.png",
+    "category": "carpet",
+    "defect": "hole",
+    "bbox_1000": [
+      557,
+      403,
+      728,
+      645
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [557, 403, 728, 645]. There is a hole defect at [557, 403, 728, 645]."
+      }
+    ]
+  },
+  {
+    "id": "72b82fd2-c354-4d74-8fb0-352c418f171b",
+    "image": "bottle/test/broken_small/001.png",
+    "mask": "bottle/ground_truth/broken_small/001_mask.png",
+    "category": "bottle",
+    "defect": "broken_small",
+    "bbox_1000": [
+      202,
+      286,
+      353,
+      710
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [202, 286, 353, 710]. There is a broken_small defect at [202, 286, 353, 710]."
+      }
+    ]
+  },
+  {
+    "id": "55006e10-47dd-4409-9911-0d4c2a6b215b",
+    "image": "screw/test/scratch_neck/013.png",
+    "mask": "screw/ground_truth/scratch_neck/013_mask.png",
+    "category": "screw",
+    "defect": "scratch_neck",
+    "bbox_1000": [
+      592,
+      476,
+      675,
+      529
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [592, 476, 675, 529]. There is a scratch_neck defect at [592, 476, 675, 529]."
+      }
+    ]
+  },
+  {
+    "id": "ff250ecc-a25c-4042-ae17-6179ea96388c",
+    "image": "hazelnut/test/crack/001.png",
+    "mask": "hazelnut/ground_truth/crack/001_mask.png",
+    "category": "hazelnut",
+    "defect": "crack",
+    "bbox_1000": [
+      525,
+      329,
+      839,
+      691
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [525, 329, 839, 691]. There is a crack defect at [525, 329, 839, 691]."
+      }
+    ]
+  },
+  {
+    "id": "e1ee9da6-305a-4f6a-8b51-7ba202bb579b",
+    "image": "pill/test/faulty_imprint/016.png",
+    "mask": "pill/ground_truth/faulty_imprint/016_mask.png",
+    "category": "pill",
+    "defect": "faulty_imprint",
+    "bbox_1000": [
+      325,
+      281,
+      684,
+      576
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [325, 281, 684, 576]. There is a faulty_imprint defect at [325, 281, 684, 576]."
+      }
+    ]
+  },
+  {
+    "id": "3eaea81b-5876-4f89-bab4-c3a3dc98ad24",
+    "image": "capsule/test/crack/005.png",
+    "mask": "capsule/ground_truth/crack/005_mask.png",
+    "category": "capsule",
+    "defect": "crack",
+    "bbox_1000": [
+      121,
+      377,
+      196,
+      483
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [121, 377, 196, 483]. There is a crack defect at [121, 377, 196, 483]."
+      }
+    ]
+  },
+  {
+    "id": "fdec3fd9-3776-437a-b81c-e5a240fa613a",
+    "image": "screw/test/thread_top/007.png",
+    "mask": "screw/ground_truth/thread_top/007_mask.png",
+    "category": "screw",
+    "defect": "thread_top",
+    "bbox_1000": [
+      495,
+      449,
+      608,
+      540
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [495, 449, 608, 540]. There is a thread_top defect at [495, 449, 608, 540]."
+      }
+    ]
+  },
+  {
+    "id": "9158672a-7b29-479f-8487-bfee3f13473c",
+    "image": "tile/test/glue_strip/007.png",
+    "mask": "tile/ground_truth/glue_strip/007_mask.png",
+    "category": "tile",
+    "defect": "glue_strip",
+    "bbox_1000": [
+      411,
+      421,
+      999,
+      999
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [411, 421, 999, 999]. There is a glue_strip defect at [411, 421, 999, 999]."
+      }
+    ]
+  },
+  {
+    "id": "8724c19e-8f0c-42b7-972d-6503c4c38724",
+    "image": "wood/test/hole/003.png",
+    "mask": "wood/ground_truth/hole/003_mask.png",
+    "category": "wood",
+    "defect": "hole",
+    "bbox_1000": [
+      155,
+      159,
+      823,
+      893
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [155, 159, 823, 893]. There is a hole defect at [155, 159, 823, 893]."
+      }
+    ]
+  },
+  {
+    "id": "8b958963-ceba-4a58-8954-a23a4a417e46",
+    "image": "bottle/test/broken_small/016.png",
+    "mask": "bottle/ground_truth/broken_small/016_mask.png",
+    "category": "bottle",
+    "defect": "broken_small",
+    "bbox_1000": [
+      651,
+      232,
+      817,
+      470
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [651, 232, 817, 470]. There is a broken_small defect at [651, 232, 817, 470]."
+      }
+    ]
+  },
+  {
+    "id": "92056133-0bd9-4ddd-a390-48832e3486bd",
+    "image": "wood/test/scratch/004.png",
+    "mask": "wood/ground_truth/scratch/004_mask.png",
+    "category": "wood",
+    "defect": "scratch",
+    "bbox_1000": [
+      320,
+      149,
+      862,
+      859
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [320, 149, 862, 859]. There is a scratch defect at [320, 149, 862, 859]."
+      }
+    ]
+  },
+  {
+    "id": "86505d8b-c9eb-4436-8329-be0ad6e9f595",
+    "image": "bottle/test/broken_small/010.png",
+    "mask": "bottle/ground_truth/broken_small/010_mask.png",
+    "category": "bottle",
+    "defect": "broken_small",
+    "bbox_1000": [
+      510,
+      181,
+      820,
+      606
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [510, 181, 820, 606]. There is a broken_small defect at [510, 181, 820, 606]."
+      }
+    ]
+  },
+  {
+    "id": "84ea4e58-471d-4cf1-9ea4-b9c337bd66bf",
+    "image": "toothbrush/test/defective/003.png",
+    "mask": "toothbrush/ground_truth/defective/003_mask.png",
+    "category": "toothbrush",
+    "defect": "defective",
+    "bbox_1000": [
+      441,
+      234,
+      604,
+      820
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [441, 234, 604, 820]. There is a defective defect at [441, 234, 604, 820]."
+      }
+    ]
+  },
+  {
+    "id": "888e42ad-46c7-4cce-be72-381b1281a8cb",
+    "image": "cable/test/cut_inner_insulation/003.png",
+    "mask": "cable/ground_truth/cut_inner_insulation/003_mask.png",
+    "category": "cable",
+    "defect": "cut_inner_insulation",
+    "bbox_1000": [
+      258,
+      171,
+      756,
+      745
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [258, 171, 756, 745]. There is a cut_inner_insulation defect at [258, 171, 756, 745]."
+      }
+    ]
+  },
+  {
+    "id": "1294df67-8a3a-409a-8f27-8a84632ea8b6",
+    "image": "pill/test/faulty_imprint/000.png",
+    "mask": "pill/ground_truth/faulty_imprint/000_mask.png",
+    "category": "pill",
+    "defect": "faulty_imprint",
+    "bbox_1000": [
+      562,
+      379,
+      664,
+      491
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [562, 379, 664, 491]. There is a faulty_imprint defect at [562, 379, 664, 491]."
+      }
+    ]
+  },
+  {
+    "id": "59915145-2098-4b5c-92b6-3f1eac03426c",
+    "image": "leather/test/color/010.png",
+    "mask": "leather/ground_truth/color/010_mask.png",
+    "category": "leather",
+    "defect": "color",
+    "bbox_1000": [
+      767,
+      149,
+      826,
+      196
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [767, 149, 826, 196]. There is a color defect at [767, 149, 826, 196]."
+      }
+    ]
+  },
+  {
+    "id": "9b076de7-bea9-40a9-88b9-33ea0c9000d6",
+    "image": "carpet/test/hole/004.png",
+    "mask": "carpet/ground_truth/hole/004_mask.png",
+    "category": "carpet",
+    "defect": "hole",
+    "bbox_1000": [
+      697,
+      482,
+      832,
+      640
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [697, 482, 832, 640]. There is a hole defect at [697, 482, 832, 640]."
+      }
+    ]
+  },
+  {
+    "id": "c003c963-b7e6-4a2b-bb49-50d93d7644ca",
+    "image": "capsule/test/poke/004.png",
+    "mask": "capsule/ground_truth/poke/004_mask.png",
+    "category": "capsule",
+    "defect": "poke",
+    "bbox_1000": [
+      624,
+      476,
+      804,
+      559
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [624, 476, 804, 559]. There is a poke defect at [624, 476, 804, 559]."
+      }
+    ]
+  },
+  {
+    "id": "bdcb474e-a9f4-407a-acc2-abbb1720011a",
+    "image": "grid/test/thread/008.png",
+    "mask": "grid/ground_truth/thread/008_mask.png",
+    "category": "grid",
+    "defect": "thread",
+    "bbox_1000": [
+      138,
+      0,
+      919,
+      999
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [138, 0, 919, 999]. There is a thread defect at [138, 0, 919, 999]."
+      }
+    ]
+  },
+  {
+    "id": "7b93b734-4cb1-4a69-a68d-08211cb27bde",
+    "image": "zipper/test/combined/006.png",
+    "mask": "zipper/ground_truth/combined/006_mask.png",
+    "category": "zipper",
+    "defect": "combined",
+    "bbox_1000": [
+      57,
+      439,
+      577,
+      775
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [57, 439, 577, 775]. There is a combined defect at [57, 439, 577, 775]."
+      }
+    ]
+  },
+  {
+    "id": "e090bc83-131d-4833-a443-7f591c00802a",
+    "image": "wood/test/scratch/018.png",
+    "mask": "wood/ground_truth/scratch/018_mask.png",
+    "category": "wood",
+    "defect": "scratch",
+    "bbox_1000": [
+      0,
+      251,
+      243,
+      470
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [0, 251, 243, 470]. There is a scratch defect at [0, 251, 243, 470]."
+      }
+    ]
+  },
+  {
+    "id": "1ec9b986-490f-4568-8ce3-b60311fbffe7",
+    "image": "metal_nut/test/color/020.png",
+    "mask": "metal_nut/ground_truth/color/020_mask.png",
+    "category": "metal_nut",
+    "defect": "color",
+    "bbox_1000": [
+      336,
+      76,
+      516,
+      393
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [336, 76, 516, 393]. There is a color defect at [336, 76, 516, 393]."
+      }
+    ]
+  },
+  {
+    "id": "1d772516-0b67-40f4-a957-b762d3550658",
+    "image": "toothbrush/test/defective/012.png",
+    "mask": "toothbrush/ground_truth/defective/012_mask.png",
+    "category": "toothbrush",
+    "defect": "defective",
+    "bbox_1000": [
+      330,
+      23,
+      576,
+      907
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [330, 23, 576, 907]. There is a defective defect at [330, 23, 576, 907]."
+      }
+    ]
+  },
+  {
+    "id": "d314fec0-34cd-4af5-a8de-ceeaa221c174",
+    "image": "bottle/test/broken_small/003.png",
+    "mask": "bottle/ground_truth/broken_small/003_mask.png",
+    "category": "bottle",
+    "defect": "broken_small",
+    "bbox_1000": [
+      156,
+      476,
+      812,
+      838
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [156, 476, 812, 838]. There is a broken_small defect at [156, 476, 812, 838]."
+      }
+    ]
+  },
+  {
+    "id": "cf5e66f8-497c-46ef-babb-6d1fd533900e",
+    "image": "transistor/test/misplaced/002.png",
+    "mask": "transistor/ground_truth/misplaced/002_mask.png",
+    "category": "transistor",
+    "defect": "misplaced",
+    "bbox_1000": [
+      232,
+      70,
+      774,
+      868
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [232, 70, 774, 868]. There is a misplaced defect at [232, 70, 774, 868]."
+      }
+    ]
+  },
+  {
+    "id": "d85f0b2a-577f-4d8d-bb21-f547aa39ceb0",
+    "image": "hazelnut/test/cut/000.png",
+    "mask": "hazelnut/ground_truth/cut/000_mask.png",
+    "category": "hazelnut",
+    "defect": "cut",
+    "bbox_1000": [
+      385,
+      594,
+      540,
+      688
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [385, 594, 540, 688]. There is a cut defect at [385, 594, 540, 688]."
+      }
+    ]
+  },
+  {
+    "id": "629b6fb3-1ba3-4b21-9586-9babbddaebba",
+    "image": "cable/test/cut_inner_insulation/008.png",
+    "mask": "cable/ground_truth/cut_inner_insulation/008_mask.png",
+    "category": "cable",
+    "defect": "cut_inner_insulation",
+    "bbox_1000": [
+      517,
+      389,
+      709,
+      693
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [517, 389, 709, 693]. There is a cut_inner_insulation defect at [517, 389, 709, 693]."
+      }
+    ]
+  },
+  {
+    "id": "e0956336-da43-49eb-b063-1222dc9c45a8",
+    "image": "transistor/test/cut_lead/002.png",
+    "mask": "transistor/ground_truth/cut_lead/002_mask.png",
+    "category": "transistor",
+    "defect": "cut_lead",
+    "bbox_1000": [
+      451,
+      713,
+      541,
+      867
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [451, 713, 541, 867]. There is a cut_lead defect at [451, 713, 541, 867]."
+      }
+    ]
+  },
+  {
+    "id": "58dac4be-f8e8-479a-9115-9d7f7e88d3f8",
+    "image": "toothbrush/test/defective/023.png",
+    "mask": "toothbrush/ground_truth/defective/023_mask.png",
+    "category": "toothbrush",
+    "defect": "defective",
+    "bbox_1000": [
+      247,
+      383,
+      440,
+      621
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [247, 383, 440, 621]. There is a defective defect at [247, 383, 440, 621]."
+      }
+    ]
+  },
+  {
+    "id": "53a922f8-9305-40d1-ac49-2a51aba0945e",
+    "image": "screw/test/scratch_head/012.png",
+    "mask": "screw/ground_truth/scratch_head/012_mask.png",
+    "category": "screw",
+    "defect": "scratch_head",
+    "bbox_1000": [
+      257,
+      186,
+      336,
+      255
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [257, 186, 336, 255]. There is a scratch_head defect at [257, 186, 336, 255]."
+      }
+    ]
+  },
+  {
+    "id": "07c26a46-2754-41a0-9928-93cee4da745b",
+    "image": "bottle/test/broken_small/021.png",
+    "mask": "bottle/ground_truth/broken_small/021_mask.png",
+    "category": "bottle",
+    "defect": "broken_small",
+    "bbox_1000": [
+      696,
+      476,
+      820,
+      741
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [696, 476, 820, 741]. There is a broken_small defect at [696, 476, 820, 741]."
+      }
+    ]
+  },
+  {
+    "id": "e07b1302-62ce-412a-b8f5-ceb59b50a042",
+    "image": "leather/test/glue/003.png",
+    "mask": "leather/ground_truth/glue/003_mask.png",
+    "category": "leather",
+    "defect": "glue",
+    "bbox_1000": [
+      587,
+      163,
+      794,
+      369
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [587, 163, 794, 369]. There is a glue defect at [587, 163, 794, 369]."
+      }
+    ]
+  },
+  {
+    "id": "7f175718-9fe0-40ca-acc3-53b6407458df",
+    "image": "bottle/test/broken_small/011.png",
+    "mask": "bottle/ground_truth/broken_small/011_mask.png",
+    "category": "bottle",
+    "defect": "broken_small",
+    "bbox_1000": [
+      173,
+      432,
+      756,
+      743
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [173, 432, 756, 743]. There is a broken_small defect at [173, 432, 756, 743]."
+      }
+    ]
+  },
+  {
+    "id": "4f5b859a-5532-425d-aa2a-49feefbee8e4",
+    "image": "metal_nut/test/scratch/001.png",
+    "mask": "metal_nut/ground_truth/scratch/001_mask.png",
+    "category": "metal_nut",
+    "defect": "scratch",
+    "bbox_1000": [
+      461,
+      481,
+      870,
+      891
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [461, 481, 870, 891]. There is a scratch defect at [461, 481, 870, 891]."
+      }
+    ]
+  },
+  {
+    "id": "26ace23d-972c-4336-b2c4-b1c1a0f4ed9a",
+    "image": "cable/test/bent_wire/006.png",
+    "mask": "cable/ground_truth/bent_wire/006_mask.png",
+    "category": "cable",
+    "defect": "bent_wire",
+    "bbox_1000": [
+      116,
+      452,
+      419,
+      799
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [116, 452, 419, 799]. There is a bent_wire defect at [116, 452, 419, 799]."
+      }
+    ]
+  },
+  {
+    "id": "ac838312-5594-4625-a784-f5b0f0dbc5cf",
+    "image": "wood/test/combined/003.png",
+    "mask": "wood/ground_truth/combined/003_mask.png",
+    "category": "wood",
+    "defect": "combined",
+    "bbox_1000": [
+      24,
+      472,
+      710,
+      861
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [24, 472, 710, 861]. There is a combined defect at [24, 472, 710, 861]."
+      }
+    ]
+  },
+  {
+    "id": "9b70df2f-b299-4653-b8b4-4b0f2b252c8e",
+    "image": "leather/test/color/001.png",
+    "mask": "leather/ground_truth/color/001_mask.png",
+    "category": "leather",
+    "defect": "color",
+    "bbox_1000": [
+      641,
+      354,
+      720,
+      477
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [641, 354, 720, 477]. There is a color defect at [641, 354, 720, 477]."
+      }
+    ]
+  },
+  {
+    "id": "40b99936-5bc3-4f46-98d2-e537d6164a98",
+    "image": "carpet/test/color/004.png",
+    "mask": "carpet/ground_truth/color/004_mask.png",
+    "category": "carpet",
+    "defect": "color",
+    "bbox_1000": [
+      712,
+      306,
+      860,
+      483
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [712, 306, 860, 483]. There is a color defect at [712, 306, 860, 483]."
+      }
+    ]
+  },
+  {
+    "id": "68bacec1-4ee3-46f2-9590-84cbecc9476b",
+    "image": "bottle/test/contamination/009.png",
+    "mask": "bottle/ground_truth/contamination/009_mask.png",
+    "category": "bottle",
+    "defect": "contamination",
+    "bbox_1000": [
+      283,
+      287,
+      707,
+      703
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [283, 287, 707, 703]. There is a contamination defect at [283, 287, 707, 703]."
+      }
+    ]
+  },
+  {
+    "id": "daed7d4b-aa3a-4d32-ae1f-5fcbe7c2a642",
+    "image": "carpet/test/thread/009.png",
+    "mask": "carpet/ground_truth/thread/009_mask.png",
+    "category": "carpet",
+    "defect": "thread",
+    "bbox_1000": [
+      328,
+      303,
+      406,
+      397
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [328, 303, 406, 397]. There is a thread defect at [328, 303, 406, 397]."
+      }
+    ]
+  },
+  {
+    "id": "b7357e72-d9d1-4363-84c8-a090f6caf80c",
+    "image": "metal_nut/test/color/016.png",
+    "mask": "metal_nut/ground_truth/color/016_mask.png",
+    "category": "metal_nut",
+    "defect": "color",
+    "bbox_1000": [
+      683,
+      251,
+      884,
+      459
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [683, 251, 884, 459]. There is a color defect at [683, 251, 884, 459]."
+      }
+    ]
+  },
+  {
+    "id": "0c13c31b-b62e-4294-ab4b-735f9757edd3",
+    "image": "metal_nut/test/flip/017.png",
+    "mask": "metal_nut/ground_truth/flip/017_mask.png",
+    "category": "metal_nut",
+    "defect": "flip",
+    "bbox_1000": [
+      57,
+      53,
+      949,
+      950
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [57, 53, 949, 950]. There is a flip defect at [57, 53, 949, 950]."
+      }
+    ]
+  },
+  {
+    "id": "7b54d935-7e94-4f9d-9f79-5c598b12ba60",
+    "image": "leather/test/fold/000.png",
+    "mask": "leather/ground_truth/fold/000_mask.png",
+    "category": "leather",
+    "defect": "fold",
+    "bbox_1000": [
+      344,
+      200,
+      539,
+      290
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [344, 200, 539, 290]. There is a fold defect at [344, 200, 539, 290]."
+      }
+    ]
+  },
+  {
+    "id": "aaac114c-4685-454a-a0bb-6218b9f9dbf9",
+    "image": "carpet/test/color/015.png",
+    "mask": "carpet/ground_truth/color/015_mask.png",
+    "category": "carpet",
+    "defect": "color",
+    "bbox_1000": [
+      542,
+      258,
+      629,
+      375
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [542, 258, 629, 375]. There is a color defect at [542, 258, 629, 375]."
+      }
+    ]
+  },
+  {
+    "id": "2f9a530f-a187-41d8-ba01-9e3d0d07abe9",
+    "image": "metal_nut/test/bent/001.png",
+    "mask": "metal_nut/ground_truth/bent/001_mask.png",
+    "category": "metal_nut",
+    "defect": "bent",
+    "bbox_1000": [
+      587,
+      803,
+      789,
+      931
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [587, 803, 789, 931]. There is a bent defect at [587, 803, 789, 931]."
+      }
+    ]
+  },
+  {
+    "id": "fbac8918-f0b5-4e3a-ba21-6256e6b7a318",
+    "image": "leather/test/glue/016.png",
+    "mask": "leather/ground_truth/glue/016_mask.png",
+    "category": "leather",
+    "defect": "glue",
+    "bbox_1000": [
+      744,
+      617,
+      944,
+      687
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [744, 617, 944, 687]. There is a glue defect at [744, 617, 944, 687]."
+      }
+    ]
+  },
+  {
+    "id": "04cb9c4b-d220-439b-bba6-5d85b1169063",
+    "image": "zipper/test/fabric_interior/005.png",
+    "mask": "zipper/ground_truth/fabric_interior/005_mask.png",
+    "category": "zipper",
+    "defect": "fabric_interior",
+    "bbox_1000": [
+      556,
+      688,
+      660,
+      848
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [556, 688, 660, 848]. There is a fabric_interior defect at [556, 688, 660, 848]."
+      }
+    ]
+  },
+  {
+    "id": "4e3c6018-36e9-4c0a-b08e-f767b79048b6",
+    "image": "screw/test/thread_side/002.png",
+    "mask": "screw/ground_truth/thread_side/002_mask.png",
+    "category": "screw",
+    "defect": "thread_side",
+    "bbox_1000": [
+      519,
+      626,
+      582,
+      729
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [519, 626, 582, 729]. There is a thread_side defect at [519, 626, 582, 729]."
+      }
+    ]
+  },
+  {
+    "id": "1ebfeaa5-9726-4eef-965f-32fb32e47304",
+    "image": "metal_nut/test/bent/021.png",
+    "mask": "metal_nut/ground_truth/bent/021_mask.png",
+    "category": "metal_nut",
+    "defect": "bent",
+    "bbox_1000": [
+      200,
+      760,
+      420,
+      934
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [200, 760, 420, 934]. There is a bent defect at [200, 760, 420, 934]."
+      }
+    ]
+  },
+  {
+    "id": "1f32646d-2ff2-44a3-a6bf-fb7be0b5c535",
+    "image": "pill/test/contamination/000.png",
+    "mask": "pill/ground_truth/contamination/000_mask.png",
+    "category": "pill",
+    "defect": "contamination",
+    "bbox_1000": [
+      716,
+      507,
+      800,
+      620
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [716, 507, 800, 620]. There is a contamination defect at [716, 507, 800, 620]."
+      }
+    ]
+  },
+  {
+    "id": "46378d0d-e9d0-46c6-a86c-7e8f8687e2d3",
+    "image": "wood/test/color/002.png",
+    "mask": "wood/ground_truth/color/002_mask.png",
+    "category": "wood",
+    "defect": "color",
+    "bbox_1000": [
+      258,
+      326,
+      548,
+      570
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [258, 326, 548, 570]. There is a color defect at [258, 326, 548, 570]."
+      }
+    ]
+  },
+  {
+    "id": "e2156b4d-a9f2-4d7e-84fa-5ec08ede0c87",
+    "image": "pill/test/crack/020.png",
+    "mask": "pill/ground_truth/crack/020_mask.png",
+    "category": "pill",
+    "defect": "crack",
+    "bbox_1000": [
+      260,
+      220,
+      371,
+      314
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [260, 220, 371, 314]. There is a crack defect at [260, 220, 371, 314]."
+      }
+    ]
+  },
+  {
+    "id": "26b4a5ab-53ab-4066-bb5f-0dbe4cf62a34",
+    "image": "hazelnut/test/print/000.png",
+    "mask": "hazelnut/ground_truth/print/000_mask.png",
+    "category": "hazelnut",
+    "defect": "print",
+    "bbox_1000": [
+      496,
+      285,
+      790,
+      632
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [496, 285, 790, 632]. There is a print defect at [496, 285, 790, 632]."
+      }
+    ]
+  },
+  {
+    "id": "63a07d1d-ea98-43dd-b326-fd5c8ff09398",
+    "image": "grid/test/bent/005.png",
+    "mask": "grid/ground_truth/bent/005_mask.png",
+    "category": "grid",
+    "defect": "bent",
+    "bbox_1000": [
+      125,
+      277,
+      860,
+      720
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [125, 277, 860, 720]. There is a bent defect at [125, 277, 860, 720]."
+      }
+    ]
+  },
+  {
+    "id": "97918c3e-f6b1-42fd-bfb5-90a5587f1acf",
+    "image": "pill/test/contamination/004.png",
+    "mask": "pill/ground_truth/contamination/004_mask.png",
+    "category": "pill",
+    "defect": "contamination",
+    "bbox_1000": [
+      446,
+      242,
+      531,
+      374
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [446, 242, 531, 374]. There is a contamination defect at [446, 242, 531, 374]."
+      }
+    ]
+  },
+  {
+    "id": "865ff50b-1a30-4233-87d0-7547f5d1d424",
+    "image": "pill/test/contamination/013.png",
+    "mask": "pill/ground_truth/contamination/013_mask.png",
+    "category": "pill",
+    "defect": "contamination",
+    "bbox_1000": [
+      655,
+      378,
+      771,
+      476
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [655, 378, 771, 476]. There is a contamination defect at [655, 378, 771, 476]."
+      }
+    ]
+  },
+  {
+    "id": "487393a9-12a4-4165-9fee-408574f9bbea",
+    "image": "metal_nut/test/scratch/000.png",
+    "mask": "metal_nut/ground_truth/scratch/000_mask.png",
+    "category": "metal_nut",
+    "defect": "scratch",
+    "bbox_1000": [
+      491,
+      583,
+      734,
+      781
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [491, 583, 734, 781]. There is a scratch defect at [491, 583, 734, 781]."
+      }
+    ]
+  },
+  {
+    "id": "96fba689-62b2-43b6-ae8d-2b2fbf82b33a",
+    "image": "toothbrush/test/defective/009.png",
+    "mask": "toothbrush/ground_truth/defective/009_mask.png",
+    "category": "toothbrush",
+    "defect": "defective",
+    "bbox_1000": [
+      386,
+      665,
+      694,
+      701
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [386, 665, 694, 701]. There is a defective defect at [386, 665, 694, 701]."
+      }
+    ]
+  },
+  {
+    "id": "233bac06-a842-4a45-83a5-2a481d0c6b0c",
+    "image": "zipper/test/broken_teeth/007.png",
+    "mask": "zipper/ground_truth/broken_teeth/007_mask.png",
+    "category": "zipper",
+    "defect": "broken_teeth",
+    "bbox_1000": [
+      377,
+      0,
+      833,
+      844
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [377, 0, 833, 844]. There is a broken_teeth defect at [377, 0, 833, 844]."
+      }
+    ]
+  },
+  {
+    "id": "ac0fd211-fbc8-4823-a9d4-62a5a5b9a052",
+    "image": "tile/test/crack/006.png",
+    "mask": "tile/ground_truth/crack/006_mask.png",
+    "category": "tile",
+    "defect": "crack",
+    "bbox_1000": [
+      246,
+      0,
+      999,
+      999
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [246, 0, 999, 999]. There is a crack defect at [246, 0, 999, 999]."
+      }
+    ]
+  },
+  {
+    "id": "4f8bc4e0-50b0-493a-bb6d-f4fcaa8998e2",
+    "image": "toothbrush/test/defective/021.png",
+    "mask": "toothbrush/ground_truth/defective/021_mask.png",
+    "category": "toothbrush",
+    "defect": "defective",
+    "bbox_1000": [
+      329,
+      308,
+      409,
+      367
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [329, 308, 409, 367]. There is a defective defect at [329, 308, 409, 367]."
+      }
+    ]
+  },
+  {
+    "id": "19eab687-190d-4d10-a00b-30bb02ee8fcc",
+    "image": "carpet/test/hole/002.png",
+    "mask": "carpet/ground_truth/hole/002_mask.png",
+    "category": "carpet",
+    "defect": "hole",
+    "bbox_1000": [
+      481,
+      210,
+      657,
+      369
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [481, 210, 657, 369]. There is a hole defect at [481, 210, 657, 369]."
+      }
+    ]
+  },
+  {
+    "id": "333aa8de-fdec-4f8b-825e-91d73be19036",
+    "image": "toothbrush/test/defective/028.png",
+    "mask": "toothbrush/ground_truth/defective/028_mask.png",
+    "category": "toothbrush",
+    "defect": "defective",
+    "bbox_1000": [
+      436,
+      320,
+      566,
+      897
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [436, 320, 566, 897]. There is a defective defect at [436, 320, 566, 897]."
+      }
+    ]
+  },
+  {
+    "id": "ab38576f-b3ab-4f82-80b6-c80b6dcad8d6",
+    "image": "screw/test/thread_top/011.png",
+    "mask": "screw/ground_truth/thread_top/011_mask.png",
+    "category": "screw",
+    "defect": "thread_top",
+    "bbox_1000": [
+      321,
+      544,
+      447,
+      646
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [321, 544, 447, 646]. There is a thread_top defect at [321, 544, 447, 646]."
+      }
+    ]
+  },
+  {
+    "id": "a35717bd-61a4-4d66-91c9-c35a92695e6e",
+    "image": "screw/test/scratch_neck/002.png",
+    "mask": "screw/ground_truth/scratch_neck/002_mask.png",
+    "category": "screw",
+    "defect": "scratch_neck",
+    "bbox_1000": [
+      379,
+      455,
+      473,
+      519
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [379, 455, 473, 519]. There is a scratch_neck defect at [379, 455, 473, 519]."
+      }
+    ]
+  },
+  {
+    "id": "547f2915-d564-482a-b05b-eb27adb2c992",
+    "image": "leather/test/glue/006.png",
+    "mask": "leather/ground_truth/glue/006_mask.png",
+    "category": "leather",
+    "defect": "glue",
+    "bbox_1000": [
+      565,
+      507,
+      684,
+      598
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [565, 507, 684, 598]. There is a glue defect at [565, 507, 684, 598]."
+      }
+    ]
+  },
+  {
+    "id": "1ceb5b4d-7fb1-495c-9d53-7e843ca5287a",
+    "image": "carpet/test/color/014.png",
+    "mask": "carpet/ground_truth/color/014_mask.png",
+    "category": "carpet",
+    "defect": "color",
+    "bbox_1000": [
+      594,
+      452,
+      641,
+      639
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [594, 452, 641, 639]. There is a color defect at [594, 452, 641, 639]."
+      }
+    ]
+  },
+  {
+    "id": "5d76a9cf-7420-42b6-a1a5-ac10b6531647",
+    "image": "zipper/test/combined/013.png",
+    "mask": "zipper/ground_truth/combined/013_mask.png",
+    "category": "zipper",
+    "defect": "combined",
+    "bbox_1000": [
+      423,
+      127,
+      927,
+      448
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [423, 127, 927, 448]. There is a combined defect at [423, 127, 927, 448]."
+      }
+    ]
+  },
+  {
+    "id": "7c86183a-b1a0-4309-a894-73882b7b3c85",
+    "image": "carpet/test/thread/018.png",
+    "mask": "carpet/ground_truth/thread/018_mask.png",
+    "category": "carpet",
+    "defect": "thread",
+    "bbox_1000": [
+      400,
+      678,
+      446,
+      821
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [400, 678, 446, 821]. There is a thread defect at [400, 678, 446, 821]."
+      }
+    ]
+  },
+  {
+    "id": "19d41332-ad8b-4061-b27d-4651af2bf8ec",
+    "image": "pill/test/scratch/009.png",
+    "mask": "pill/ground_truth/scratch/009_mask.png",
+    "category": "pill",
+    "defect": "scratch",
+    "bbox_1000": [
+      216,
+      582,
+      855,
+      800
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [216, 582, 855, 800]. There is a scratch defect at [216, 582, 855, 800]."
+      }
+    ]
+  },
+  {
+    "id": "75882378-9a7a-4451-96c4-433a8cf18d17",
+    "image": "grid/test/bent/011.png",
+    "mask": "grid/ground_truth/bent/011_mask.png",
+    "category": "grid",
+    "defect": "bent",
+    "bbox_1000": [
+      245,
+      128,
+      672,
+      615
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [245, 128, 672, 615]. There is a bent defect at [245, 128, 672, 615]."
+      }
+    ]
+  },
+  {
+    "id": "2362aa97-89d2-406b-bfcc-e5eff9d8f545",
+    "image": "capsule/test/poke/010.png",
+    "mask": "capsule/ground_truth/poke/010_mask.png",
+    "category": "capsule",
+    "defect": "poke",
+    "bbox_1000": [
+      728,
+      486,
+      808,
+      549
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [728, 486, 808, 549]. There is a poke defect at [728, 486, 808, 549]."
+      }
+    ]
+  },
+  {
+    "id": "413e582b-b0f8-4199-9e16-5ead02606a4d",
+    "image": "zipper/test/rough/008.png",
+    "mask": "zipper/ground_truth/rough/008_mask.png",
+    "category": "zipper",
+    "defect": "rough",
+    "bbox_1000": [
+      425,
+      644,
+      583,
+      999
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [425, 644, 583, 999]. There is a rough defect at [425, 644, 583, 999]."
+      }
+    ]
+  },
+  {
+    "id": "a1c47257-4fbf-4e0a-aed0-a781f6d443e1",
+    "image": "pill/test/scratch/012.png",
+    "mask": "pill/ground_truth/scratch/012_mask.png",
+    "category": "pill",
+    "defect": "scratch",
+    "bbox_1000": [
+      120,
+      458,
+      265,
+      628
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [120, 458, 265, 628]. There is a scratch defect at [120, 458, 265, 628]."
+      }
+    ]
+  },
+  {
+    "id": "1fa3554e-495b-494b-b483-beccd83fc6a0",
+    "image": "grid/test/metal_contamination/000.png",
+    "mask": "grid/ground_truth/metal_contamination/000_mask.png",
+    "category": "grid",
+    "defect": "metal_contamination",
+    "bbox_1000": [
+      482,
+      248,
+      548,
+      309
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [482, 248, 548, 309]. There is a metal_contamination defect at [482, 248, 548, 309]."
+      }
+    ]
+  },
+  {
+    "id": "b96b7a7b-103d-4d90-bb82-965259122487",
+    "image": "toothbrush/test/defective/004.png",
+    "mask": "toothbrush/ground_truth/defective/004_mask.png",
+    "category": "toothbrush",
+    "defect": "defective",
+    "bbox_1000": [
+      483,
+      520,
+      645,
+      742
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [483, 520, 645, 742]. There is a defective defect at [483, 520, 645, 742]."
+      }
+    ]
+  },
+  {
+    "id": "5ea11d82-13bb-478f-9690-b3adffd22f1d",
+    "image": "bottle/test/broken_large/019.png",
+    "mask": "bottle/ground_truth/broken_large/019_mask.png",
+    "category": "bottle",
+    "defect": "broken_large",
+    "bbox_1000": [
+      423,
+      176,
+      876,
+      872
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [423, 176, 876, 872]. There is a broken_large defect at [423, 176, 876, 872]."
+      }
+    ]
+  },
+  {
+    "id": "ba501b84-409c-4059-9324-1bbe1ea294dd",
+    "image": "bottle/test/contamination/020.png",
+    "mask": "bottle/ground_truth/contamination/020_mask.png",
+    "category": "bottle",
+    "defect": "contamination",
+    "bbox_1000": [
+      279,
+      303,
+      713,
+      736
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [279, 303, 713, 736]. There is a contamination defect at [279, 303, 713, 736]."
+      }
+    ]
+  },
+  {
+    "id": "189db8dc-8b91-47d6-b0cb-3576acdff1c6",
+    "image": "cable/test/bent_wire/011.png",
+    "mask": "cable/ground_truth/bent_wire/011_mask.png",
+    "category": "cable",
+    "defect": "bent_wire",
+    "bbox_1000": [
+      249,
+      142,
+      806,
+      820
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [249, 142, 806, 820]. There is a bent_wire defect at [249, 142, 806, 820]."
+      }
+    ]
+  },
+  {
+    "id": "36c5ef85-0bb5-4de2-b479-e7c46aacb589",
+    "image": "cable/test/missing_cable/003.png",
+    "mask": "cable/ground_truth/missing_cable/003_mask.png",
+    "category": "cable",
+    "defect": "missing_cable",
+    "bbox_1000": [
+      190,
+      405,
+      488,
+      726
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [190, 405, 488, 726]. There is a missing_cable defect at [190, 405, 488, 726]."
+      }
+    ]
+  },
+  {
+    "id": "483dafa2-7a15-4963-83e5-b9f8ce8d2b2a",
+    "image": "carpet/test/color/008.png",
+    "mask": "carpet/ground_truth/color/008_mask.png",
+    "category": "carpet",
+    "defect": "color",
+    "bbox_1000": [
+      319,
+      299,
+      619,
+      634
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [319, 299, 619, 634]. There is a color defect at [319, 299, 619, 634]."
+      }
+    ]
+  },
+  {
+    "id": "b5ed09c3-de61-4bc8-9096-df7c9d21c0ff",
+    "image": "wood/test/liquid/009.png",
+    "mask": "wood/ground_truth/liquid/009_mask.png",
+    "category": "wood",
+    "defect": "liquid",
+    "bbox_1000": [
+      3,
+      410,
+      571,
+      601
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [3, 410, 571, 601]. There is a liquid defect at [3, 410, 571, 601]."
+      }
+    ]
+  },
+  {
+    "id": "0a19ca2a-3f83-4181-b19f-f4acc56890fb",
+    "image": "capsule/test/scratch/022.png",
+    "mask": "capsule/ground_truth/scratch/022_mask.png",
+    "category": "capsule",
+    "defect": "scratch",
+    "bbox_1000": [
+      531,
+      401,
+      860,
+      606
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [531, 401, 860, 606]. There is a scratch defect at [531, 401, 860, 606]."
+      }
+    ]
+  },
+  {
+    "id": "aee5741c-3706-4e24-9cd6-f0ca996e7c3e",
+    "image": "leather/test/fold/012.png",
+    "mask": "leather/ground_truth/fold/012_mask.png",
+    "category": "leather",
+    "defect": "fold",
+    "bbox_1000": [
+      682,
+      474,
+      889,
+      584
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [682, 474, 889, 584]. There is a fold defect at [682, 474, 889, 584]."
+      }
+    ]
+  },
+  {
+    "id": "5a0e96d0-24f5-4ef0-86d6-43bcc212c56c",
+    "image": "tile/test/gray_stroke/005.png",
+    "mask": "tile/ground_truth/gray_stroke/005_mask.png",
+    "category": "tile",
+    "defect": "gray_stroke",
+    "bbox_1000": [
+      624,
+      119,
+      824,
+      561
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [624, 119, 824, 561]. There is a gray_stroke defect at [624, 119, 824, 561]."
+      }
+    ]
+  },
+  {
+    "id": "485c4029-da23-42f7-8069-61ea799c0832",
+    "image": "screw/test/thread_side/014.png",
+    "mask": "screw/ground_truth/thread_side/014_mask.png",
+    "category": "screw",
+    "defect": "thread_side",
+    "bbox_1000": [
+      628,
+      574,
+      694,
+      659
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [628, 574, 694, 659]. There is a thread_side defect at [628, 574, 694, 659]."
+      }
+    ]
+  },
+  {
+    "id": "b6e8e079-7cf4-498f-9325-98e33d144400",
+    "image": "metal_nut/test/scratch/007.png",
+    "mask": "metal_nut/ground_truth/scratch/007_mask.png",
+    "category": "metal_nut",
+    "defect": "scratch",
+    "bbox_1000": [
+      281,
+      96,
+      843,
+      903
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [281, 96, 843, 903]. There is a scratch defect at [281, 96, 843, 903]."
+      }
+    ]
+  },
+  {
+    "id": "d83d2775-55e9-465f-93ef-eab8cf7a29f9",
+    "image": "hazelnut/test/cut/013.png",
+    "mask": "hazelnut/ground_truth/cut/013_mask.png",
+    "category": "hazelnut",
+    "defect": "cut",
+    "bbox_1000": [
+      278,
+      277,
+      521,
+      581
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [278, 277, 521, 581]. There is a cut defect at [278, 277, 521, 581]."
+      }
+    ]
+  },
+  {
+    "id": "41ea1bee-b181-4226-b865-34d09540fbfe",
+    "image": "transistor/test/misplaced/001.png",
+    "mask": "transistor/ground_truth/misplaced/001_mask.png",
+    "category": "transistor",
+    "defect": "misplaced",
+    "bbox_1000": [
+      246,
+      62,
+      910,
+      949
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [246, 62, 910, 949]. There is a misplaced defect at [246, 62, 910, 949]."
+      }
+    ]
+  },
+  {
+    "id": "adf69ca7-f013-47d9-96e5-54d9d5f17b3c",
+    "image": "hazelnut/test/crack/014.png",
+    "mask": "hazelnut/ground_truth/crack/014_mask.png",
+    "category": "hazelnut",
+    "defect": "crack",
+    "bbox_1000": [
+      568,
+      457,
+      724,
+      674
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [568, 457, 724, 674]. There is a crack defect at [568, 457, 724, 674]."
+      }
+    ]
+  },
+  {
+    "id": "574605f1-c2a1-47cd-bc00-dc23a02bb1b8",
+    "image": "zipper/test/split_teeth/011.png",
+    "mask": "zipper/ground_truth/split_teeth/011_mask.png",
+    "category": "zipper",
+    "defect": "split_teeth",
+    "bbox_1000": [
+      399,
+      112,
+      534,
+      304
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [399, 112, 534, 304]. There is a split_teeth defect at [399, 112, 534, 304]."
+      }
+    ]
+  },
+  {
+    "id": "8d42481f-dbc1-441c-a804-e12510cb0856",
+    "image": "transistor/test/cut_lead/009.png",
+    "mask": "transistor/ground_truth/cut_lead/009_mask.png",
+    "category": "transistor",
+    "defect": "cut_lead",
+    "bbox_1000": [
+      459,
+      573,
+      562,
+      871
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [459, 573, 562, 871]. There is a cut_lead defect at [459, 573, 562, 871]."
+      }
+    ]
+  },
+  {
+    "id": "07a06053-2534-4399-aca5-4803b283fdd7",
+    "image": "bottle/test/contamination/015.png",
+    "mask": "bottle/ground_truth/contamination/015_mask.png",
+    "category": "bottle",
+    "defect": "contamination",
+    "bbox_1000": [
+      339,
+      282,
+      722,
+      621
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [339, 282, 722, 621]. There is a contamination defect at [339, 282, 722, 621]."
+      }
+    ]
+  },
+  {
+    "id": "1fc2d817-d7d3-4482-afa6-9f21922104a5",
+    "image": "pill/test/color/009.png",
+    "mask": "pill/ground_truth/color/009_mask.png",
+    "category": "pill",
+    "defect": "color",
+    "bbox_1000": [
+      702,
+      249,
+      726,
+      276
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [702, 249, 726, 276]. There is a color defect at [702, 249, 726, 276]."
+      }
+    ]
+  },
+  {
+    "id": "323b44d0-151d-40b2-9cde-028af4ca98e4",
+    "image": "grid/test/metal_contamination/009.png",
+    "mask": "grid/ground_truth/metal_contamination/009_mask.png",
+    "category": "grid",
+    "defect": "metal_contamination",
+    "bbox_1000": [
+      138,
+      580,
+      245,
+      711
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [138, 580, 245, 711]. There is a metal_contamination defect at [138, 580, 245, 711]."
+      }
+    ]
+  },
+  {
+    "id": "3113e276-f3ca-4dd4-b3f9-4dd195132702",
+    "image": "cable/test/cable_swap/009.png",
+    "mask": "cable/ground_truth/cable_swap/009_mask.png",
+    "category": "cable",
+    "defect": "cable_swap",
+    "bbox_1000": [
+      532,
+      407,
+      840,
+      728
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [532, 407, 840, 728]. There is a cable_swap defect at [532, 407, 840, 728]."
+      }
+    ]
+  },
+  {
+    "id": "099db522-473b-4c87-b67e-02df9d03983f",
+    "image": "leather/test/poke/014.png",
+    "mask": "leather/ground_truth/poke/014_mask.png",
+    "category": "leather",
+    "defect": "poke",
+    "bbox_1000": [
+      223,
+      680,
+      274,
+      733
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [223, 680, 274, 733]. There is a poke defect at [223, 680, 274, 733]."
+      }
+    ]
+  },
+  {
+    "id": "c7704cf0-73ad-4e22-9cb6-e2f82c5ee1e7",
+    "image": "metal_nut/test/color/001.png",
+    "mask": "metal_nut/ground_truth/color/001_mask.png",
+    "category": "metal_nut",
+    "defect": "color",
+    "bbox_1000": [
+      660,
+      309,
+      856,
+      410
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [660, 309, 856, 410]. There is a color defect at [660, 309, 856, 410]."
+      }
+    ]
+  },
+  {
+    "id": "10f33f80-872b-40a8-85ba-42b1f71b110a",
+    "image": "tile/test/crack/013.png",
+    "mask": "tile/ground_truth/crack/013_mask.png",
+    "category": "tile",
+    "defect": "crack",
+    "bbox_1000": [
+      0,
+      0,
+      870,
+      999
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [0, 0, 870, 999]. There is a crack defect at [0, 0, 870, 999]."
+      }
+    ]
+  },
+  {
+    "id": "ebdd322d-e563-4504-9632-12c5144b8ffe",
+    "image": "leather/test/color/015.png",
+    "mask": "leather/ground_truth/color/015_mask.png",
+    "category": "leather",
+    "defect": "color",
+    "bbox_1000": [
+      309,
+      378,
+      410,
+      583
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [309, 378, 410, 583]. There is a color defect at [309, 378, 410, 583]."
+      }
+    ]
+  },
+  {
+    "id": "a9afccd3-8c3d-4a0c-ae70-d756c9880e3f",
+    "image": "pill/test/contamination/019.png",
+    "mask": "pill/ground_truth/contamination/019_mask.png",
+    "category": "pill",
+    "defect": "contamination",
+    "bbox_1000": [
+      471,
+      528,
+      575,
+      624
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [471, 528, 575, 624]. There is a contamination defect at [471, 528, 575, 624]."
+      }
+    ]
+  },
+  {
+    "id": "85dad8f2-0c54-4c25-a1f1-286f2156b526",
+    "image": "capsule/test/crack/009.png",
+    "mask": "capsule/ground_truth/crack/009_mask.png",
+    "category": "capsule",
+    "defect": "crack",
+    "bbox_1000": [
+      397,
+      363,
+      734,
+      409
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [397, 363, 734, 409]. There is a crack defect at [397, 363, 734, 409]."
+      }
+    ]
+  },
+  {
+    "id": "a5b298cf-b3b6-4081-94d7-602e7f20419c",
+    "image": "tile/test/oil/000.png",
+    "mask": "tile/ground_truth/oil/000_mask.png",
+    "category": "tile",
+    "defect": "oil",
+    "bbox_1000": [
+      221,
+      196,
+      904,
+      805
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [221, 196, 904, 805]. There is a oil defect at [221, 196, 904, 805]."
+      }
+    ]
+  },
+  {
+    "id": "38b2ee92-a36c-4677-9008-0a8bcd1fffb0",
+    "image": "grid/test/thread/009.png",
+    "mask": "grid/ground_truth/thread/009_mask.png",
+    "category": "grid",
+    "defect": "thread",
+    "bbox_1000": [
+      264,
+      0,
+      999,
+      999
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [264, 0, 999, 999]. There is a thread defect at [264, 0, 999, 999]."
+      }
+    ]
+  },
+  {
+    "id": "048d4b57-30ae-4dc9-8dec-173ac676ff1c",
+    "image": "bottle/test/broken_small/013.png",
+    "mask": "bottle/ground_truth/broken_small/013_mask.png",
+    "category": "bottle",
+    "defect": "broken_small",
+    "bbox_1000": [
+      504,
+      153,
+      834,
+      377
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [504, 153, 834, 377]. There is a broken_small defect at [504, 153, 834, 377]."
+      }
+    ]
+  },
+  {
+    "id": "9d2cefc6-440d-41b8-b977-473907621e0e",
+    "image": "tile/test/rough/003.png",
+    "mask": "tile/ground_truth/rough/003_mask.png",
+    "category": "tile",
+    "defect": "rough",
+    "bbox_1000": [
+      70,
+      302,
+      999,
+      617
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [70, 302, 999, 617]. There is a rough defect at [70, 302, 999, 617]."
+      }
+    ]
+  },
+  {
+    "id": "3dcdd97b-4a70-40a5-8109-6119eb62ecd4",
+    "image": "wood/test/color/006.png",
+    "mask": "wood/ground_truth/color/006_mask.png",
+    "category": "wood",
+    "defect": "color",
+    "bbox_1000": [
+      147,
+      243,
+      720,
+      836
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [147, 243, 720, 836]. There is a color defect at [147, 243, 720, 836]."
+      }
+    ]
+  },
+  {
+    "id": "ed8d9752-f308-4c50-b7ba-b90080f26d17",
+    "image": "wood/test/color/003.png",
+    "mask": "wood/ground_truth/color/003_mask.png",
+    "category": "wood",
+    "defect": "color",
+    "bbox_1000": [
+      81,
+      238,
+      898,
+      691
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [81, 238, 898, 691]. There is a color defect at [81, 238, 898, 691]."
+      }
+    ]
+  },
+  {
+    "id": "1d79ce29-94a9-4bd1-bb3b-12b0c59bd874",
+    "image": "tile/test/oil/009.png",
+    "mask": "tile/ground_truth/oil/009_mask.png",
+    "category": "tile",
+    "defect": "oil",
+    "bbox_1000": [
+      369,
+      300,
+      768,
+      782
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [369, 300, 768, 782]. There is a oil defect at [369, 300, 768, 782]."
+      }
+    ]
+  },
+  {
+    "id": "00a4e810-c012-4ff7-9558-0a33e0a221f6",
+    "image": "metal_nut/test/scratch/019.png",
+    "mask": "metal_nut/ground_truth/scratch/019_mask.png",
+    "category": "metal_nut",
+    "defect": "scratch",
+    "bbox_1000": [
+      646,
+      187,
+      927,
+      573
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [646, 187, 927, 573]. There is a scratch defect at [646, 187, 927, 573]."
+      }
+    ]
+  },
+  {
+    "id": "eb6b624e-5417-4d2c-adca-fe417c406570",
+    "image": "grid/test/broken/000.png",
+    "mask": "grid/ground_truth/broken/000_mask.png",
+    "category": "grid",
+    "defect": "broken",
+    "bbox_1000": [
+      0,
+      221,
+      722,
+      636
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [0, 221, 722, 636]. There is a broken defect at [0, 221, 722, 636]."
+      }
+    ]
+  },
+  {
+    "id": "712ff4a1-fea3-4411-944b-08a941070f63",
+    "image": "capsule/test/crack/012.png",
+    "mask": "capsule/ground_truth/crack/012_mask.png",
+    "category": "capsule",
+    "defect": "crack",
+    "bbox_1000": [
+      502,
+      394,
+      536,
+      635
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [502, 394, 536, 635]. There is a crack defect at [502, 394, 536, 635]."
+      }
+    ]
+  },
+  {
+    "id": "8bfc410e-f7bf-4233-a0ff-d5549f201ccd",
+    "image": "cable/test/missing_cable/001.png",
+    "mask": "cable/ground_truth/missing_cable/001_mask.png",
+    "category": "cable",
+    "defect": "missing_cable",
+    "bbox_1000": [
+      209,
+      441,
+      491,
+      760
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [209, 441, 491, 760]. There is a missing_cable defect at [209, 441, 491, 760]."
+      }
+    ]
+  },
+  {
+    "id": "a2863f34-6db4-4276-82b4-2c3fd4c65a28",
+    "image": "pill/test/faulty_imprint/006.png",
+    "mask": "pill/ground_truth/faulty_imprint/006_mask.png",
+    "category": "pill",
+    "defect": "faulty_imprint",
+    "bbox_1000": [
+      526,
+      362,
+      684,
+      644
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [526, 362, 684, 644]. There is a faulty_imprint defect at [526, 362, 684, 644]."
+      }
+    ]
+  },
+  {
+    "id": "eb9b9dad-b9ec-4288-a185-1b2532a84bdd",
+    "image": "capsule/test/squeeze/014.png",
+    "mask": "capsule/ground_truth/squeeze/014_mask.png",
+    "category": "capsule",
+    "defect": "squeeze",
+    "bbox_1000": [
+      200,
+      320,
+      871,
+      677
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [200, 320, 871, 677]. There is a squeeze defect at [200, 320, 871, 677]."
+      }
+    ]
+  },
+  {
+    "id": "72ae7531-377f-4501-b931-1b83671b558e",
+    "image": "leather/test/fold/015.png",
+    "mask": "leather/ground_truth/fold/015_mask.png",
+    "category": "leather",
+    "defect": "fold",
+    "bbox_1000": [
+      456,
+      548,
+      961,
+      665
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [456, 548, 961, 665]. There is a fold defect at [456, 548, 961, 665]."
+      }
+    ]
+  },
+  {
+    "id": "b04901d8-9bbb-41af-a5af-13342083cc5b",
+    "image": "transistor/test/misplaced/006.png",
+    "mask": "transistor/ground_truth/misplaced/006_mask.png",
+    "category": "transistor",
+    "defect": "misplaced",
+    "bbox_1000": [
+      233,
+      38,
+      839,
+      862
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [233, 38, 839, 862]. There is a misplaced defect at [233, 38, 839, 862]."
+      }
+    ]
+  },
+  {
+    "id": "69e48563-bcb7-4de9-8de5-7a6c63322cce",
+    "image": "screw/test/scratch_head/002.png",
+    "mask": "screw/ground_truth/scratch_head/002_mask.png",
+    "category": "screw",
+    "defect": "scratch_head",
+    "bbox_1000": [
+      241,
+      203,
+      309,
+      274
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [241, 203, 309, 274]. There is a scratch_head defect at [241, 203, 309, 274]."
+      }
+    ]
+  },
+  {
+    "id": "5dc2ef45-9b93-443e-af70-643b1b8105e7",
+    "image": "grid/test/glue/000.png",
+    "mask": "grid/ground_truth/glue/000_mask.png",
+    "category": "grid",
+    "defect": "glue",
+    "bbox_1000": [
+      670,
+      32,
+      760,
+      106
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [670, 32, 760, 106]. There is a glue defect at [670, 32, 760, 106]."
+      }
+    ]
+  },
+  {
+    "id": "b3885ba9-5785-4e20-b949-5c28e7ef1428",
+    "image": "carpet/test/thread/005.png",
+    "mask": "carpet/ground_truth/thread/005_mask.png",
+    "category": "carpet",
+    "defect": "thread",
+    "bbox_1000": [
+      377,
+      301,
+      999,
+      999
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [377, 301, 999, 999]. There is a thread defect at [377, 301, 999, 999]."
+      }
+    ]
+  },
+  {
+    "id": "a8783cc2-9af5-4ebe-adf4-9f290b5e1165",
+    "image": "grid/test/bent/001.png",
+    "mask": "grid/ground_truth/bent/001_mask.png",
+    "category": "grid",
+    "defect": "bent",
+    "bbox_1000": [
+      435,
+      438,
+      749,
+      812
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [435, 438, 749, 812]. There is a bent defect at [435, 438, 749, 812]."
+      }
+    ]
+  },
+  {
+    "id": "5ad10425-76c8-4fe7-911c-50c83bc8f8b4",
+    "image": "screw/test/thread_side/022.png",
+    "mask": "screw/ground_truth/thread_side/022_mask.png",
+    "category": "screw",
+    "defect": "thread_side",
+    "bbox_1000": [
+      190,
+      559,
+      304,
+      615
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [190, 559, 304, 615]. There is a thread_side defect at [190, 559, 304, 615]."
+      }
+    ]
+  },
+  {
+    "id": "9250fdcb-16ec-4ed1-9387-766f7f376622",
+    "image": "tile/test/glue_strip/003.png",
+    "mask": "tile/ground_truth/glue_strip/003_mask.png",
+    "category": "tile",
+    "defect": "glue_strip",
+    "bbox_1000": [
+      87,
+      6,
+      737,
+      971
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [87, 6, 737, 971]. There is a glue_strip defect at [87, 6, 737, 971]."
+      }
+    ]
+  },
+  {
+    "id": "ffba7cec-74f3-4ee9-a682-dd85596de315",
+    "image": "transistor/test/cut_lead/000.png",
+    "mask": "transistor/ground_truth/cut_lead/000_mask.png",
+    "category": "transistor",
+    "defect": "cut_lead",
+    "bbox_1000": [
+      229,
+      767,
+      364,
+      918
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [229, 767, 364, 918]. There is a cut_lead defect at [229, 767, 364, 918]."
+      }
+    ]
+  },
+  {
+    "id": "7ffc1d93-70be-4e5c-a792-aebfe0a59f05",
+    "image": "tile/test/rough/004.png",
+    "mask": "tile/ground_truth/rough/004_mask.png",
+    "category": "tile",
+    "defect": "rough",
+    "bbox_1000": [
+      0,
+      0,
+      999,
+      367
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [0, 0, 999, 367]. There is a rough defect at [0, 0, 999, 367]."
+      }
+    ]
+  },
+  {
+    "id": "6e180fae-04c5-4696-a2a8-7ccd42b7196a",
+    "image": "transistor/test/misplaced/003.png",
+    "mask": "transistor/ground_truth/misplaced/003_mask.png",
+    "category": "transistor",
+    "defect": "misplaced",
+    "bbox_1000": [
+      227,
+      71,
+      770,
+      871
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [227, 71, 770, 871]. There is a misplaced defect at [227, 71, 770, 871]."
+      }
+    ]
+  },
+  {
+    "id": "373e54f9-35b9-4679-bc83-fca10a78967c",
+    "image": "carpet/test/cut/007.png",
+    "mask": "carpet/ground_truth/cut/007_mask.png",
+    "category": "carpet",
+    "defect": "cut",
+    "bbox_1000": [
+      617,
+      610,
+      824,
+      881
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [617, 610, 824, 881]. There is a cut defect at [617, 610, 824, 881]."
+      }
+    ]
+  },
+  {
+    "id": "2909efbf-9fb2-4423-960c-f4208a47c79f",
+    "image": "carpet/test/thread/016.png",
+    "mask": "carpet/ground_truth/thread/016_mask.png",
+    "category": "carpet",
+    "defect": "thread",
+    "bbox_1000": [
+      0,
+      0,
+      400,
+      478
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [0, 0, 400, 478]. There is a thread defect at [0, 0, 400, 478]."
+      }
+    ]
+  },
+  {
+    "id": "9dae9ecc-f645-4d5b-a321-097c4ba89bf9",
+    "image": "metal_nut/test/flip/003.png",
+    "mask": "metal_nut/ground_truth/flip/003_mask.png",
+    "category": "metal_nut",
+    "defect": "flip",
+    "bbox_1000": [
+      64,
+      50,
+      943,
+      939
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [64, 50, 943, 939]. There is a flip defect at [64, 50, 943, 939]."
+      }
+    ]
+  },
+  {
+    "id": "86a85458-6554-4eba-858b-cd02ed9f054d",
+    "image": "leather/test/glue/008.png",
+    "mask": "leather/ground_truth/glue/008_mask.png",
+    "category": "leather",
+    "defect": "glue",
+    "bbox_1000": [
+      546,
+      153,
+      749,
+      876
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [546, 153, 749, 876]. There is a glue defect at [546, 153, 749, 876]."
+      }
+    ]
+  },
+  {
+    "id": "15183b38-24ee-41e8-ad68-5511f244077b",
+    "image": "hazelnut/test/cut/008.png",
+    "mask": "hazelnut/ground_truth/cut/008_mask.png",
+    "category": "hazelnut",
+    "defect": "cut",
+    "bbox_1000": [
+      414,
+      198,
+      714,
+      820
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [414, 198, 714, 820]. There is a cut defect at [414, 198, 714, 820]."
+      }
+    ]
+  },
+  {
+    "id": "dff5ba91-ca38-4986-ab1f-de8831443c5a",
+    "image": "cable/test/cut_inner_insulation/002.png",
+    "mask": "cable/ground_truth/cut_inner_insulation/002_mask.png",
+    "category": "cable",
+    "defect": "cut_inner_insulation",
+    "bbox_1000": [
+      495,
+      482,
+      787,
+      725
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [495, 482, 787, 725]. There is a cut_inner_insulation defect at [495, 482, 787, 725]."
+      }
+    ]
+  },
+  {
+    "id": "ce3b33b6-5ec4-4a91-870c-e9fe1f5742a0",
+    "image": "capsule/test/poke/000.png",
+    "mask": "capsule/ground_truth/poke/000_mask.png",
+    "category": "capsule",
+    "defect": "poke",
+    "bbox_1000": [
+      608,
+      442,
+      805,
+      558
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [608, 442, 805, 558]. There is a poke defect at [608, 442, 805, 558]."
+      }
+    ]
+  },
+  {
+    "id": "bf4f4803-0286-409d-bac1-a45df91281d3",
+    "image": "leather/test/color/011.png",
+    "mask": "leather/ground_truth/color/011_mask.png",
+    "category": "leather",
+    "defect": "color",
+    "bbox_1000": [
+      298,
+      600,
+      327,
+      749
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [298, 600, 327, 749]. There is a color defect at [298, 600, 327, 749]."
+      }
+    ]
+  },
+  {
+    "id": "10266a51-9aac-4551-8eac-ce1eebb7feb0",
+    "image": "toothbrush/test/defective/000.png",
+    "mask": "toothbrush/ground_truth/defective/000_mask.png",
+    "category": "toothbrush",
+    "defect": "defective",
+    "bbox_1000": [
+      237,
+      198,
+      574,
+      656
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [237, 198, 574, 656]. There is a defective defect at [237, 198, 574, 656]."
+      }
+    ]
+  },
+  {
+    "id": "f6075d8c-9847-42d8-95fa-c96827b02a73",
+    "image": "bottle/test/broken_small/019.png",
+    "mask": "bottle/ground_truth/broken_small/019_mask.png",
+    "category": "bottle",
+    "defect": "broken_small",
+    "bbox_1000": [
+      190,
+      493,
+      381,
+      798
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [190, 493, 381, 798]. There is a broken_small defect at [190, 493, 381, 798]."
+      }
+    ]
+  },
+  {
+    "id": "d7dc6143-3ff3-447c-ac14-f6cd52cd7e65",
+    "image": "pill/test/faulty_imprint/002.png",
+    "mask": "pill/ground_truth/faulty_imprint/002_mask.png",
+    "category": "pill",
+    "defect": "faulty_imprint",
+    "bbox_1000": [
+      318,
+      379,
+      462,
+      515
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [318, 379, 462, 515]. There is a faulty_imprint defect at [318, 379, 462, 515]."
+      }
+    ]
+  },
+  {
+    "id": "04d938f6-c4ef-42bc-a7cd-0ce3602ecdf1",
+    "image": "hazelnut/test/cut/015.png",
+    "mask": "hazelnut/ground_truth/cut/015_mask.png",
+    "category": "hazelnut",
+    "defect": "cut",
+    "bbox_1000": [
+      271,
+      445,
+      544,
+      521
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [271, 445, 544, 521]. There is a cut defect at [271, 445, 544, 521]."
+      }
+    ]
+  },
+  {
+    "id": "c5ec0b30-e47e-48de-b928-2f878842d785",
+    "image": "bottle/test/contamination/019.png",
+    "mask": "bottle/ground_truth/contamination/019_mask.png",
+    "category": "bottle",
+    "defect": "contamination",
+    "bbox_1000": [
+      590,
+      496,
+      820,
+      774
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [590, 496, 820, 774]. There is a contamination defect at [590, 496, 820, 774]."
+      }
+    ]
+  },
+  {
+    "id": "e278607c-5f6e-4538-9ec5-1fd8de346d17",
+    "image": "transistor/test/damaged_case/003.png",
+    "mask": "transistor/ground_truth/damaged_case/003_mask.png",
+    "category": "transistor",
+    "defect": "damaged_case",
+    "bbox_1000": [
+      510,
+      494,
+      707,
+      657
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [510, 494, 707, 657]. There is a damaged_case defect at [510, 494, 707, 657]."
+      }
+    ]
+  },
+  {
+    "id": "2c958bf5-4e8f-4f24-a704-29d4c02740ba",
+    "image": "wood/test/color/001.png",
+    "mask": "wood/ground_truth/color/001_mask.png",
+    "category": "wood",
+    "defect": "color",
+    "bbox_1000": [
+      261,
+      114,
+      751,
+      503
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [261, 114, 751, 503]. There is a color defect at [261, 114, 751, 503]."
+      }
+    ]
+  },
+  {
+    "id": "d72f7d6e-56a6-48c0-9def-1cfbef781130",
+    "image": "cable/test/missing_cable/005.png",
+    "mask": "cable/ground_truth/missing_cable/005_mask.png",
+    "category": "cable",
+    "defect": "missing_cable",
+    "bbox_1000": [
+      474,
+      469,
+      781,
+      766
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [474, 469, 781, 766]. There is a missing_cable defect at [474, 469, 781, 766]."
+      }
+    ]
+  },
+  {
+    "id": "a2529770-e98e-4ef1-b139-f478f08a065f",
+    "image": "toothbrush/test/defective/006.png",
+    "mask": "toothbrush/ground_truth/defective/006_mask.png",
+    "category": "toothbrush",
+    "defect": "defective",
+    "bbox_1000": [
+      399,
+      387,
+      592,
+      626
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [399, 387, 592, 626]. There is a defective defect at [399, 387, 592, 626]."
+      }
+    ]
+  },
+  {
+    "id": "1d94f209-4ec4-40ee-9b72-526e6a728032",
+    "image": "capsule/test/poke/018.png",
+    "mask": "capsule/ground_truth/poke/018_mask.png",
+    "category": "capsule",
+    "defect": "poke",
+    "bbox_1000": [
+      758,
+      416,
+      815,
+      469
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [758, 416, 815, 469]. There is a poke defect at [758, 416, 815, 469]."
+      }
+    ]
+  },
+  {
+    "id": "7a2f9b19-0962-4139-971c-dbd8ae73ddac",
+    "image": "wood/test/hole/001.png",
+    "mask": "wood/ground_truth/hole/001_mask.png",
+    "category": "wood",
+    "defect": "hole",
+    "bbox_1000": [
+      234,
+      83,
+      719,
+      811
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [234, 83, 719, 811]. There is a hole defect at [234, 83, 719, 811]."
+      }
+    ]
+  },
+  {
+    "id": "a54c3542-e7ba-44bd-bbeb-edf45dea2aaa",
+    "image": "transistor/test/misplaced/000.png",
+    "mask": "transistor/ground_truth/misplaced/000_mask.png",
+    "category": "transistor",
+    "defect": "misplaced",
+    "bbox_1000": [
+      186,
+      75,
+      774,
+      886
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [186, 75, 774, 886]. There is a misplaced defect at [186, 75, 774, 886]."
+      }
+    ]
+  },
+  {
+    "id": "07b7a4a3-6885-4968-a108-722dd087a85f",
+    "image": "transistor/test/misplaced/008.png",
+    "mask": "transistor/ground_truth/misplaced/008_mask.png",
+    "category": "transistor",
+    "defect": "misplaced",
+    "bbox_1000": [
+      88,
+      69,
+      997,
+      884
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [88, 69, 997, 884]. There is a misplaced defect at [88, 69, 997, 884]."
+      }
+    ]
+  },
+  {
+    "id": "1c8a10fc-0623-41d9-b3f1-046ad9bf1591",
+    "image": "grid/test/glue/006.png",
+    "mask": "grid/ground_truth/glue/006_mask.png",
+    "category": "grid",
+    "defect": "glue",
+    "bbox_1000": [
+      618,
+      440,
+      688,
+      528
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [618, 440, 688, 528]. There is a glue defect at [618, 440, 688, 528]."
+      }
+    ]
+  },
+  {
+    "id": "6d2f8397-3504-4488-8168-96c865d13a2a",
+    "image": "toothbrush/test/defective/011.png",
+    "mask": "toothbrush/ground_truth/defective/011_mask.png",
+    "category": "toothbrush",
+    "defect": "defective",
+    "bbox_1000": [
+      360,
+      539,
+      482,
+      594
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [360, 539, 482, 594]. There is a defective defect at [360, 539, 482, 594]."
+      }
+    ]
+  },
+  {
+    "id": "bbe2466c-ecbc-4c04-9df0-af1277c7fef1",
+    "image": "carpet/test/thread/003.png",
+    "mask": "carpet/ground_truth/thread/003_mask.png",
+    "category": "carpet",
+    "defect": "thread",
+    "bbox_1000": [
+      184,
+      686,
+      272,
+      831
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [184, 686, 272, 831]. There is a thread defect at [184, 686, 272, 831]."
+      }
+    ]
+  },
+  {
+    "id": "5997248c-648b-4aae-8f50-0e15ad3cf91d",
+    "image": "transistor/test/bent_lead/009.png",
+    "mask": "transistor/ground_truth/bent_lead/009_mask.png",
+    "category": "transistor",
+    "defect": "bent_lead",
+    "bbox_1000": [
+      225,
+      862,
+      753,
+      994
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [225, 862, 753, 994]. There is a bent_lead defect at [225, 862, 753, 994]."
+      }
+    ]
+  },
+  {
+    "id": "21eb87d0-38f8-4f55-bebc-5029637601f2",
+    "image": "grid/test/glue/007.png",
+    "mask": "grid/ground_truth/glue/007_mask.png",
+    "category": "grid",
+    "defect": "glue",
+    "bbox_1000": [
+      237,
+      594,
+      325,
+      685
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [237, 594, 325, 685]. There is a glue defect at [237, 594, 325, 685]."
+      }
+    ]
+  },
+  {
+    "id": "c6ef6f9f-4372-445f-b684-f9ee5cc2e31a",
+    "image": "leather/test/poke/007.png",
+    "mask": "leather/ground_truth/poke/007_mask.png",
+    "category": "leather",
+    "defect": "poke",
+    "bbox_1000": [
+      401,
+      502,
+      454,
+      563
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [401, 502, 454, 563]. There is a poke defect at [401, 502, 454, 563]."
+      }
+    ]
+  },
+  {
+    "id": "f6dd3915-1bc4-489c-885a-346b66cc65e2",
+    "image": "zipper/test/fabric_border/016.png",
+    "mask": "zipper/ground_truth/fabric_border/016_mask.png",
+    "category": "zipper",
+    "defect": "fabric_border",
+    "bbox_1000": [
+      60,
+      127,
+      920,
+      879
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [60, 127, 920, 879]. There is a fabric_border defect at [60, 127, 920, 879]."
+      }
+    ]
+  },
+  {
+    "id": "bfb86d32-e19d-45e5-89ed-02ae75213e79",
+    "image": "grid/test/bent/007.png",
+    "mask": "grid/ground_truth/bent/007_mask.png",
+    "category": "grid",
+    "defect": "bent",
+    "bbox_1000": [
+      96,
+      205,
+      742,
+      573
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [96, 205, 742, 573]. There is a bent defect at [96, 205, 742, 573]."
+      }
+    ]
+  },
+  {
+    "id": "18eb899f-2fce-4c74-8739-18c14b33541e",
+    "image": "hazelnut/test/cut/012.png",
+    "mask": "hazelnut/ground_truth/cut/012_mask.png",
+    "category": "hazelnut",
+    "defect": "cut",
+    "bbox_1000": [
+      501,
+      427,
+      561,
+      707
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [501, 427, 561, 707]. There is a cut defect at [501, 427, 561, 707]."
+      }
+    ]
+  },
+  {
+    "id": "fa7b2010-3b17-4c63-aea4-d6adeebfb631",
+    "image": "screw/test/manipulated_front/016.png",
+    "mask": "screw/ground_truth/manipulated_front/016_mask.png",
+    "category": "screw",
+    "defect": "manipulated_front",
+    "bbox_1000": [
+      372,
+      771,
+      454,
+      945
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [372, 771, 454, 945]. There is a manipulated_front defect at [372, 771, 454, 945]."
+      }
+    ]
+  },
+  {
+    "id": "9433eaef-1f59-4f0b-85b4-7d3bb0b4708c",
+    "image": "zipper/test/fabric_interior/007.png",
+    "mask": "zipper/ground_truth/fabric_interior/007_mask.png",
+    "category": "zipper",
+    "defect": "fabric_interior",
+    "bbox_1000": [
+      578,
+      297,
+      614,
+      353
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [578, 297, 614, 353]. There is a fabric_interior defect at [578, 297, 614, 353]."
+      }
+    ]
+  },
+  {
+    "id": "436bf61f-c279-41f7-b623-165f38e0f172",
+    "image": "toothbrush/test/defective/010.png",
+    "mask": "toothbrush/ground_truth/defective/010_mask.png",
+    "category": "toothbrush",
+    "defect": "defective",
+    "bbox_1000": [
+      275,
+      714,
+      714,
+      999
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [275, 714, 714, 999]. There is a defective defect at [275, 714, 714, 999]."
+      }
+    ]
+  },
+  {
+    "id": "765f3f09-0d0d-4d13-b667-7b77e7eaefaf",
+    "image": "bottle/test/broken_large/018.png",
+    "mask": "bottle/ground_truth/broken_large/018_mask.png",
+    "category": "bottle",
+    "defect": "broken_large",
+    "bbox_1000": [
+      142,
+      191,
+      667,
+      880
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [142, 191, 667, 880]. There is a broken_large defect at [142, 191, 667, 880]."
+      }
+    ]
+  },
+  {
+    "id": "7c362793-248a-457d-9623-764a711857db",
+    "image": "zipper/test/fabric_border/012.png",
+    "mask": "zipper/ground_truth/fabric_border/012_mask.png",
+    "category": "zipper",
+    "defect": "fabric_border",
+    "bbox_1000": [
+      84,
+      320,
+      920,
+      722
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [84, 320, 920, 722]. There is a fabric_border defect at [84, 320, 920, 722]."
+      }
+    ]
+  },
+  {
+    "id": "ec159033-92d0-4373-9693-d1f71c208e5b",
+    "image": "wood/test/scratch/012.png",
+    "mask": "wood/ground_truth/scratch/012_mask.png",
+    "category": "wood",
+    "defect": "scratch",
+    "bbox_1000": [
+      264,
+      144,
+      812,
+      818
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [264, 144, 812, 818]. There is a scratch defect at [264, 144, 812, 818]."
+      }
+    ]
+  },
+  {
+    "id": "d3aea954-29db-4a44-b445-6f05fb66a112",
+    "image": "tile/test/rough/001.png",
+    "mask": "tile/ground_truth/rough/001_mask.png",
+    "category": "tile",
+    "defect": "rough",
+    "bbox_1000": [
+      342,
+      152,
+      593,
+      756
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nLocate the defect as [x1, y1, x2, y2] (coordinates in 0-1000 scale) and explain in one sentence."
+      },
+      {
+        "from": "gpt",
+        "value": "Defect at [342, 152, 593, 756]. There is a rough defect at [342, 152, 593, 756]."
+      }
+    ]
+  }
+]
